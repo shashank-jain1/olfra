@@ -63,7 +63,7 @@ export default function ScentCulturePage() {
 
       {/* World Map */}
       <div className="max-w-7xl mx-auto px-6">
-        <div className="relative rounded-2xl overflow-hidden mb-16 bg-obsidian-2 border border-white/5 shadow-2xl">
+        <div className="relative rounded-2xl overflow-hidden mb-16 bg-obsidian-2 border border-hairline shadow-2xl">
           <div className="relative w-full aspect-[2/1] min-h-[400px]">
             {/* Grid lines overlay */}
             <div
@@ -137,7 +137,7 @@ export default function ScentCulturePage() {
                 </div>
                 <button 
                   onClick={() => setSelectedCity(null)} 
-                  className="w-8 h-8 flex items-center justify-center rounded-full glass border border-white/10 hover:bg-white/10 transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-full glass border border-hairline-strong hover:bg-white/10 transition-colors"
                 >
                   <X size={14} className="text-ink-soft" />
                 </button>
@@ -154,7 +154,7 @@ export default function ScentCulturePage() {
 
               <div className="space-y-1">
                 {['Top 5 Fragrances', 'Regional Shoppers', 'Age Distribution'].map((item) => (
-                  <div key={item} className="text-[11px] font-mono text-ink-faint flex items-center justify-between py-4 border-b border-white/5 uppercase tracking-wider">
+                  <div key={item} className="text-[11px] font-mono text-ink-faint flex items-center justify-between py-4 border-b border-hairline uppercase tracking-wider">
                     <span>{item}</span>
                     <span className="text-ink-ghost text-[9px]">Coming soon</span>
                   </div>
@@ -181,7 +181,7 @@ export default function ScentCulturePage() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.08, duration: 0.5 }}
                   viewport={{ once: true }}
-                  className="glass p-5 rounded-xl flex items-center justify-between border-white/5 hover:border-white/10 hover:bg-white/[0.02] transition-colors"
+                  className="glass p-5 rounded-xl flex items-center justify-between border-hairline hover:border-hairline-strong hover:bg-white/[0.02] transition-colors"
                 >
                   <div>
                     <span className="text-ink font-serif text-lg tracking-wide">{note.name}</span>
@@ -220,7 +220,7 @@ export default function ScentCulturePage() {
               ))}
             </div>
 
-            <div className="glass p-8 rounded-2xl border-white/5">
+            <div className="glass p-8 rounded-2xl border-hairline">
               <p className="text-[10px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-2">Top Family</p>
               <p className="text-3xl mb-8 font-serif font-light text-lime">
                 {DEMOGRAPHICS[activeDemographic].top}
@@ -255,7 +255,7 @@ export default function ScentCulturePage() {
             <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">AI Weekly Report</h2>
           </div>
 
-          <div className="glass p-10 md:p-14 rounded-3xl relative overflow-hidden border-white/5">
+          <div className="glass p-10 md:p-14 rounded-3xl relative overflow-hidden border-hairline">
             <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-lime/40 to-transparent" />
 
             <div className="space-y-8 pl-4 max-w-4xl mx-auto">

@@ -40,7 +40,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
         </div>
 
         <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="glass p-8 rounded-3xl flex items-center gap-6 border-white/5 col-span-1 md:col-span-2">
+          <div className="glass p-8 rounded-3xl flex items-center gap-6 border-hairline col-span-1 md:col-span-2">
             <ScoreRing
               score={profile.skinChemistryScore}
               size={96}
@@ -74,7 +74,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        <div className="glass p-10 rounded-3xl border-white/5">
+        <div className="glass p-10 rounded-3xl border-hairline">
           <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-8">
             Accords That Excel On You
           </p>
@@ -104,7 +104,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
         </div>
 
         <div className="flex flex-col gap-6">
-          <div className="glass p-10 rounded-3xl border-white/5 flex-grow">
+          <div className="glass p-10 rounded-3xl border-hairline flex-grow">
             <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-8">
               Signature Accords
             </p>
@@ -121,7 +121,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
           </div>
 
           {profile.worstFamilies.length > 0 && (
-            <div className="glass p-10 rounded-3xl border-white/5">
+            <div className="glass p-10 rounded-3xl border-hairline">
               <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-6">
                 Accords That Underperform
               </p>
@@ -130,7 +130,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
                   <span
                     key={family.accord}
                     title={family.reason}
-                    className="px-5 py-2.5 rounded-full text-[11px] font-mono uppercase tracking-widest bg-white/5 text-ink-faint border border-white/10"
+                    className="px-5 py-2.5 rounded-full text-[11px] font-mono uppercase tracking-widest bg-white/5 text-ink-faint border border-hairline-strong"
                   >
                     {family.label}
                   </span>
@@ -159,7 +159,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
         <button
           type="button"
           onClick={onRetake}
-          className="px-10 py-4 w-full md:w-auto rounded-full font-mono text-[11px] uppercase tracking-[0.2em] text-ink-faint border border-white/10 hover:bg-white/5 hover:text-ink-muted transition-all duration-300"
+          className="px-10 py-4 w-full md:w-auto rounded-full font-mono text-[11px] uppercase tracking-[0.2em] text-ink-faint border border-hairline-strong hover:bg-white/5 hover:text-ink-muted transition-all duration-300"
         >
           Retake Analysis
         </button>
@@ -182,7 +182,7 @@ function StatCard({
   serif?: boolean;
 }) {
   return (
-    <div className="glass p-8 rounded-3xl border-white/5">
+    <div className="glass p-8 rounded-3xl border-hairline">
       <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-4">
         {label}
       </p>
@@ -209,7 +209,7 @@ function MethodologyDisclosure({ profile }: { profile: DnaProfile }) {
   const anecdotal = DNA_QUESTIONS.filter((q) => q.evidence === 'anecdotal');
 
   return (
-    <details className="glass rounded-3xl border-white/5 overflow-hidden group">
+    <details className="glass rounded-3xl border-hairline overflow-hidden group">
       <summary className="flex items-center gap-3 p-6 cursor-pointer list-none hover:bg-white/[0.02] transition-colors">
         <Info size={16} className="text-ink-faint" />
         <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">

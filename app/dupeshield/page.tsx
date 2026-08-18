@@ -75,7 +75,7 @@ export default function DupeShieldPage() {
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder="Search any fragrance… e.g. Baccarat Rouge 540"
-                  className="w-full pl-16 pr-40 py-6 rounded-full text-ink placeholder-ink-ghost outline-none transition-all duration-300 bg-white/[0.03] border border-white/10 focus:border-rose/50 focus:bg-white/[0.05] font-sans text-lg tracking-wide"
+                  className="w-full pl-16 pr-40 py-6 rounded-full text-ink placeholder-ink-ghost outline-none transition-all duration-300 bg-white/[0.03] border border-hairline-strong focus:border-rose/50 focus:bg-white/[0.05] font-sans text-lg tracking-wide"
                 />
                 <motion.button
                   type="submit"
@@ -121,7 +121,7 @@ export default function DupeShieldPage() {
               </div>
 
               {report.matches.length === 0 ? (
-                <div className="glass p-10 rounded-3xl border-white/5 text-center">
+                <div className="glass p-10 rounded-3xl border-hairline text-center">
                   <p className="text-ink-soft font-serif text-xl leading-relaxed">
                     {report.summary}
                   </p>
@@ -136,7 +136,7 @@ export default function DupeShieldPage() {
 
               <div className="mt-12 space-y-4">
                 <CatalogueNotice />
-                <div className="glass p-6 rounded-2xl border-white/5 flex items-start gap-4">
+                <div className="glass p-6 rounded-2xl border-hairline flex items-start gap-4">
                   <AlertCircle size={20} className="shrink-0 text-amber mt-0.5" />
                   <p className="text-sm text-ink-soft font-serif leading-relaxed italic pr-4">
                     Scores measure olfactory overlap, not identity. Skin chemistry
@@ -171,7 +171,7 @@ function OriginalCard({ report }: { report: NonNullable<ReturnType<typeof useDup
       <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
         <span className="w-8 h-px bg-white/20" /> Original Reference
       </p>
-      <div className="glass p-8 md:p-10 rounded-3xl border-white/10 shadow-xl relative overflow-hidden">
+      <div className="glass p-8 md:p-10 rounded-3xl border-hairline-strong shadow-xl relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-rose/5 to-transparent pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
@@ -219,7 +219,7 @@ function LoadingState() {
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-        className="w-16 h-16 rounded-full border border-white/5 border-t-rose border-r-rose/30 mx-auto mb-8"
+        className="w-16 h-16 rounded-full border border-hairline border-t-rose border-r-rose/30 mx-auto mb-8"
       />
       <p className="mt-6 text-ink-faint font-mono text-[11px] uppercase tracking-[0.2em]">
         Scoring accord profiles…
@@ -243,7 +243,7 @@ function EmptyState({ onPick }: { onPick: (example: string) => void }) {
             key={example}
             type="button"
             onClick={() => onPick(example)}
-            className="px-5 py-2.5 rounded-full text-[12px] font-mono transition-all duration-300 bg-white/[0.02] border border-white/5 text-ink-soft hover:bg-white/10 hover:text-ink hover:border-white/20"
+            className="px-5 py-2.5 rounded-full text-[12px] font-mono transition-all duration-300 bg-white/[0.02] border border-hairline text-ink-soft hover:bg-white/10 hover:text-ink hover:border-hairline-strong"
           >
             {example}
           </button>

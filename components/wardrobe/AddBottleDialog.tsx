@@ -78,15 +78,15 @@ export function AddBottleDialog({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.98 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-x-4 top-[10%] z-50 mx-auto max-w-lg max-h-[80vh] overflow-y-auto rounded-3xl bg-obsidian-2 border border-white/10 shadow-2xl"
+            className="fixed inset-x-4 top-[10%] z-50 mx-auto max-w-lg max-h-[80vh] overflow-y-auto rounded-3xl bg-obsidian-2 border border-hairline-strong shadow-2xl"
           >
-            <div className="flex items-center justify-between p-6 border-b border-white/5">
+            <div className="flex items-center justify-between p-6 border-b border-hairline">
               <h2 className="font-serif text-xl text-ink">Add a bottle</h2>
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="w-8 h-8 flex items-center justify-center rounded-full border border-white/10 text-ink-faint hover:text-white hover:bg-white/5 transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-full border border-hairline-strong text-ink-faint hover:text-white hover:bg-white/5 transition-colors"
               >
                 <X size={14} />
               </button>
@@ -129,7 +129,7 @@ export function AddBottleDialog({
                       onChange={(event) => setQuery(event.target.value)}
                       placeholder="e.g. Layton"
                       autoComplete="off"
-                      className="w-full pl-11 pr-10 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-ink placeholder-ink-ghost outline-none focus:border-amber/40 text-sm"
+                      className="w-full pl-11 pr-10 py-3 rounded-xl bg-white/[0.04] border border-hairline-strong text-ink placeholder-ink-ghost outline-none focus:border-amber/40 text-sm"
                     />
                     {search.isFetching && (
                       <Loader2
@@ -140,7 +140,7 @@ export function AddBottleDialog({
                   </div>
 
                   {search.data && search.data.results.length > 0 && (
-                    <ul className="mt-2 rounded-xl border border-white/10 divide-y divide-white/5 overflow-hidden">
+                    <ul className="mt-2 rounded-xl border border-hairline-strong divide-y divide-hairline overflow-hidden">
                       {search.data.results.slice(0, 5).map((fragrance) => (
                         <li key={fragrance.id}>
                           <button
@@ -256,7 +256,7 @@ function Field({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-ink placeholder-ink-ghost outline-none focus:border-amber/40 text-sm"
+        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-hairline-strong text-ink placeholder-ink-ghost outline-none focus:border-amber/40 text-sm"
       />
     </div>
   );

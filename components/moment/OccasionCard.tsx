@@ -53,7 +53,7 @@ export function OccasionCard({
       className={`relative rounded-3xl overflow-hidden cursor-pointer group w-full aspect-square transition-colors duration-300 border ${
         selected
           ? 'border-rose shadow-[0_0_30px_rgba(194,98,122,0.25)]'
-          : 'border-white/5 hover:border-white/15'
+          : 'border-hairline hover:border-hairline-strong'
       }`}
     >
       <div className="absolute inset-0 bg-obsidian-2/60" />

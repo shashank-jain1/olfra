@@ -45,7 +45,7 @@ export function ErrorNotice({ error, onRetry, className = '' }: ErrorNoticeProps
           <button
             type="button"
             onClick={onRetry}
-            className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] font-mono uppercase tracking-[0.15em] text-ink-soft border border-white/10 hover:bg-white/5 hover:text-ink transition-all"
+            className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] font-mono uppercase tracking-[0.15em] text-ink-soft border border-hairline-strong hover:bg-white/5 hover:text-ink transition-all"
           >
             <RefreshCw size={12} /> Try again
           </button>

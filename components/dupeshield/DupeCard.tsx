@@ -25,7 +25,7 @@ export function DupeCard({ match, index }: DupeCardProps) {
         type="button"
         aria-expanded={expanded}
         onClick={() => setExpanded((open) => !open)}
-        className="glass w-full p-6 rounded-3xl text-left cursor-pointer border-white/5 hover:border-white/10 relative overflow-hidden group focus:outline-none focus-visible:ring-2 focus-visible:ring-rose/60"
+        className="glass w-full p-6 rounded-3xl text-left cursor-pointer border-hairline hover:border-hairline-strong relative overflow-hidden group focus:outline-none focus-visible:ring-2 focus-visible:ring-rose/60"
         whileHover={{ scale: 1.01, y: -2 }}
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
       >
@@ -67,7 +67,7 @@ export function DupeCard({ match, index }: DupeCardProps) {
             {match.sharedNotes.slice(0, 5).map((note) => (
               <span
                 key={note}
-                className="text-[11px] px-3 py-1 rounded-full font-mono bg-white/5 text-ink-soft border border-white/10"
+                className="text-[11px] px-3 py-1 rounded-full font-mono bg-white/5 text-ink-soft border border-hairline-strong"
               >
                 {note}
               </span>
@@ -84,7 +84,7 @@ export function DupeCard({ match, index }: DupeCardProps) {
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               className="overflow-hidden relative z-10"
             >
-              <div className="mt-6 pt-5 border-t border-white/5">
+              <div className="mt-6 pt-5 border-t border-hairline">
                 <p className="text-ink-soft font-serif text-lg leading-relaxed italic mb-6">
                   {match.explanation}
                 </p>

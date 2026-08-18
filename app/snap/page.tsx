@@ -117,7 +117,7 @@ export default function ScentSnapPage() {
                 ))}
               </div>
             </div>
-            <button onClick={() => setResult(null)} className="w-full py-3 rounded-xl font-mono text-sm text-ink-faint border border-white/08 hover:bg-white/5 transition-all">
+            <button onClick={() => setResult(null)} className="w-full py-3 rounded-xl font-mono text-sm text-ink-faint border border-hairline hover:bg-white/5 transition-all">
               Identify Another
             </button>
           </motion.div>

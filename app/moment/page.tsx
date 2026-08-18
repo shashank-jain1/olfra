@@ -55,7 +55,7 @@ export default function ScentMomentPage() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 1.4, repeat: Infinity, ease: 'linear' }}
-            className="w-20 h-20 rounded-full border border-white/5 border-t-rose border-r-rose/30 mx-auto mb-8"
+            className="w-20 h-20 rounded-full border border-hairline border-t-rose border-r-rose/30 mx-auto mb-8"
           />
           <p className="text-ink-soft font-mono text-[11px] uppercase tracking-[0.2em]">
             Matching your moment…
@@ -233,7 +233,7 @@ export default function ScentMomentPage() {
           className={`w-full py-5 rounded-full font-mono text-[13px] uppercase tracking-[0.2em] transition-all duration-500 group ${
             ready
               ? 'bg-white text-obsidian shadow-[0_0_40px_rgba(255,255,255,0.15)]'
-              : 'bg-white/5 text-ink-faint cursor-not-allowed border border-white/10'
+              : 'bg-white/5 text-ink-faint cursor-not-allowed border border-hairline-strong'
           }`}
         >
           <span className="flex items-center justify-center gap-3">
@@ -309,7 +309,7 @@ function PillGroup({
             } font-mono tracking-wide transition-all duration-300 border ${
               active
                 ? 'bg-rose/10 text-rose border-rose/40 shadow-[0_0_20px_rgba(194,98,122,0.15)]'
-                : 'bg-white/5 text-ink-soft border-white/5 hover:bg-white/10 hover:text-ink-muted hover:border-white/15'
+                : 'bg-white/5 text-ink-soft border-hairline hover:bg-white/10 hover:text-ink-muted hover:border-hairline-strong'
             }`}
           >
             {option}

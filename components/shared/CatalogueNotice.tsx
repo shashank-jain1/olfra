@@ -17,7 +17,7 @@ export function CatalogueNotice({ className = '' }: { className?: string }) {
 
   return (
     <div
-      className={`glass p-4 rounded-2xl border-white/5 flex items-start gap-3 ${className}`}
+      className={`glass p-4 rounded-2xl border-hairline flex items-start gap-3 ${className}`}
     >
       <Info size={16} className="shrink-0 text-amber/70 mt-0.5" />
       <p className="text-[12px] text-ink-soft leading-relaxed">

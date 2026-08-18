@@ -136,7 +136,7 @@ export default function ScentDnaPage() {
                     className={`py-6 px-8 rounded-3xl font-serif text-xl tracking-wide text-center transition-all duration-300 border ${
                       selected
                         ? 'bg-mint/10 border-mint/40 text-mint'
-                        : 'bg-white/[0.02] border-white/5 text-ink-muted hover:bg-mint/5 hover:border-mint/30 hover:text-mint'
+                        : 'bg-white/[0.02] border-hairline text-ink-muted hover:bg-mint/5 hover:border-mint/30 hover:text-mint'
                     }`}
                   >
                     {option}

@@ -85,7 +85,7 @@ export default function SettingsPage() {
           />
         </section>
 
-        <section className="glass p-8 rounded-3xl border-white/5 mb-8">
+        <section className="glass p-8 rounded-3xl border-hairline mb-8">
           <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-faint mb-6">
             Your local data
           </h2>
@@ -114,7 +114,7 @@ export default function SettingsPage() {
           </div>
         </section>
 
-        <section className="glass p-8 rounded-3xl border-white/5">
+        <section className="glass p-8 rounded-3xl border-hairline">
           <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-faint mb-6">
             How credentials are handled
           </h2>
@@ -157,8 +157,8 @@ const STATUS_STYLES: Record<CapabilityStatus, { label: string; className: string
   on: { label: 'Connected', className: 'bg-mint/10 text-mint border-mint/20' },
   'always-on': { label: 'Always on', className: 'bg-mint/10 text-mint border-mint/20' },
   seed: { label: 'Seed data', className: 'bg-amber/10 text-amber border-amber/20' },
-  off: { label: 'Not configured', className: 'bg-white/5 text-ink-faint border-white/10' },
-  loading: { label: 'Checking…', className: 'bg-white/5 text-ink-faint border-white/10' },
+  off: { label: 'Not configured', className: 'bg-white/5 text-ink-faint border-hairline-strong' },
+  loading: { label: 'Checking…', className: 'bg-white/5 text-ink-faint border-hairline-strong' },
 };
 
 function CapabilityRow({
@@ -176,10 +176,10 @@ function CapabilityRow({
   const active = status === 'on' || status === 'always-on';
 
   return (
-    <div className="glass p-6 rounded-3xl border-white/5 flex items-start gap-5">
+    <div className="glass p-6 rounded-3xl border-hairline flex items-start gap-5">
       <div
         className={`w-11 h-11 rounded-2xl flex items-center justify-center border shrink-0 ${
-          active ? 'bg-mint/10 border-mint/25' : 'bg-white/5 border-white/10'
+          active ? 'bg-mint/10 border-mint/25' : 'bg-white/5 border-hairline-strong'
         }`}
       >
         <Icon size={17} className={active ? 'text-mint' : 'text-ink-faint'} />
@@ -212,7 +212,7 @@ function LocalDataRow({
   disabled: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+    <div className="flex items-center justify-between p-4 rounded-2xl bg-white/[0.02] border border-hairline">
       <div>
         <p className="text-ink-muted text-sm">{label}</p>
         <p className="text-ink-faint font-mono text-xs mt-0.5">{value}</p>
@@ -221,7 +221,7 @@ function LocalDataRow({
         type="button"
         onClick={onClear}
         disabled={disabled}
-        className="flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-mono uppercase tracking-widest border border-white/10 text-ink-faint hover:text-crimson hover:border-crimson/30 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
+        className="flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-mono uppercase tracking-widest border border-hairline-strong text-ink-faint hover:text-crimson hover:border-crimson/30 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
       >
         <Trash2 size={11} /> Clear
       </button>

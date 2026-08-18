@@ -60,7 +60,14 @@ export default function Navbar() {
   }, []);
 
   // Close on route change — otherwise the sheet stays open over the new page.
-  useEffect(() => setMenuOpen(false), [pathname]);
+  // Adjusted during render rather than in an effect: an effect would paint the
+  // destination once with the menu still covering it, then close it on a second
+  // pass. Comparing against the previous pathname collapses that into one render.
+  const [menuPathname, setMenuPathname] = useState(pathname);
+  if (pathname !== menuPathname) {
+    setMenuPathname(pathname);
+    setMenuOpen(false);
+  }
 
   // Lock body scroll and support Escape while the sheet is open.
   useEffect(() => {

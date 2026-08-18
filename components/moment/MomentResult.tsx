@@ -54,7 +54,7 @@ export function MomentResultView({
             Best fit · {primary.fit}/100
           </p>
 
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8 border-b border-white/5 pb-8">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8 border-b border-hairline pb-8">
             <div>
               <h2 className="text-4xl md:text-5xl text-ink font-serif font-light mb-2 tracking-tight">
                 {primary.fragrance.name}
@@ -90,7 +90,7 @@ export function MomentResultView({
       </article>
 
       {result.alternatives.length > 0 && (
-        <section className="glass p-8 mb-6 rounded-2xl border-white/5">
+        <section className="glass p-8 mb-6 rounded-2xl border-hairline">
           <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-6">
             Also considered
           </p>
@@ -135,7 +135,7 @@ export function MomentResultView({
         />
       </div>
 
-      <section className="glass p-6 rounded-2xl border-white/5 mb-10">
+      <section className="glass p-6 rounded-2xl border-hairline mb-10">
         <p className="text-[10px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-4">
           Accords this combination called for
         </p>
@@ -154,7 +154,7 @@ export function MomentResultView({
       <button
         type="button"
         onClick={onReset}
-        className="w-full py-4 rounded-full font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft border border-white/10 hover:bg-white/5 hover:text-ink transition-all duration-300"
+        className="w-full py-4 rounded-full font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft border border-hairline-strong hover:bg-white/5 hover:text-ink transition-all duration-300"
       >
         Start over
       </button>
@@ -172,7 +172,7 @@ function InsightCard({
   accent: string;
 }) {
   return (
-    <div className="glass p-8 rounded-2xl border-white/5">
+    <div className="glass p-8 rounded-2xl border-hairline">
       <p
         className={`text-[11px] font-mono mb-4 uppercase tracking-[0.2em] ${accent}`}
       >

@@ -63,7 +63,7 @@ export default function ScentLayerPage() {
                   value={input.value}
                   onChange={(event) => input.set(event.target.value)}
                   placeholder={input.placeholder}
-                  className="w-full px-4 py-3 rounded-xl text-white placeholder-ink-ghost outline-none pr-10 bg-white/[0.05] border border-white/10 focus:border-amber/40 transition-colors text-sm"
+                  className="w-full px-4 py-3 rounded-xl text-white placeholder-ink-ghost outline-none pr-10 bg-white/[0.05] border border-hairline-strong focus:border-amber/40 transition-colors text-sm"
                 />
                 {input.value && (
                   <button
@@ -139,7 +139,7 @@ export default function ScentLayerPage() {
               </div>
             )}
 
-            <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 mb-6">
+            <div className="p-5 rounded-2xl bg-white/[0.02] border border-hairline mb-6">
               <p className="text-[10px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-3">
                 Application Order
               </p>
@@ -184,7 +184,7 @@ export default function ScentLayerPage() {
                   setSecond(b);
                   analyse(a, b);
                 }}
-                className="glass-card w-full p-4 flex items-center justify-between text-left hover:border-white/15 transition-colors"
+                className="glass-card w-full p-4 flex items-center justify-between text-left hover:border-hairline-strong transition-colors"
               >
                 <span className="text-sm font-mono text-ink-soft">
                   {a} <span className="text-ink-ghost">+</span> {b}
