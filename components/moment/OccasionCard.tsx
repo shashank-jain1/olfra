@@ -69,7 +69,7 @@ export function OccasionCard({
         <span className="text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-110">
           {emoji}
         </span>
-        <span className="text-white/90 text-center font-mono uppercase leading-tight text-[10px] tracking-[0.08em]">
+        <span className="text-ink text-center font-mono uppercase leading-tight text-[10px] tracking-[0.08em]">
           {label}
         </span>
       </div>

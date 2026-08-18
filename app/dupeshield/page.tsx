@@ -52,10 +52,10 @@ export default function DupeShieldPage() {
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl text-white/90 mb-6 font-serif font-light tracking-tight leading-tight">
+            <h1 className="text-5xl md:text-7xl text-ink mb-6 font-serif font-light tracking-tight leading-tight">
               Find the <em className="text-rose italic font-light pr-2">perfect dupe</em>
             </h1>
-            <p className="text-white/40 text-lg md:text-xl font-light tracking-wide mb-12 max-w-2xl mx-auto">
+            <p className="text-ink-faint text-lg md:text-xl font-light tracking-wide mb-12 max-w-2xl mx-auto">
               Similarity scored from accord structure and drydown overlap. Same
               search, same score, every time.
             </p>
@@ -64,7 +64,7 @@ export default function DupeShieldPage() {
               <div className="relative flex items-center">
                 <Search
                   size={20}
-                  className="absolute left-6 text-white/30 transition-colors group-focus-within:text-rose pointer-events-none"
+                  className="absolute left-6 text-ink-faint transition-colors group-focus-within:text-rose pointer-events-none"
                 />
                 <label htmlFor="dupe-query" className="sr-only">
                   Fragrance name
@@ -75,7 +75,7 @@ export default function DupeShieldPage() {
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder="Search any fragrance… e.g. Baccarat Rouge 540"
-                  className="w-full pl-16 pr-40 py-6 rounded-full text-white/90 placeholder-white/30 outline-none transition-all duration-300 bg-white/[0.03] border border-white/10 focus:border-rose/50 focus:bg-white/[0.05] font-sans text-lg tracking-wide"
+                  className="w-full pl-16 pr-40 py-6 rounded-full text-ink placeholder-ink-ghost outline-none transition-all duration-300 bg-white/[0.03] border border-white/10 focus:border-rose/50 focus:bg-white/[0.05] font-sans text-lg tracking-wide"
                 />
                 <motion.button
                   type="submit"
@@ -112,7 +112,7 @@ export default function DupeShieldPage() {
 
             <div>
               <div className="flex items-center justify-between mb-8">
-                <p className="text-[11px] font-mono text-white/30 uppercase tracking-[0.2em] flex items-center gap-3">
+                <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] flex items-center gap-3">
                   <span className="w-8 h-px bg-white/20" />
                   {report.matches.length} match
                   {report.matches.length === 1 ? '' : 'es'} from{' '}
@@ -122,7 +122,7 @@ export default function DupeShieldPage() {
 
               {report.matches.length === 0 ? (
                 <div className="glass p-10 rounded-3xl border-white/5 text-center">
-                  <p className="text-white/60 font-serif text-xl leading-relaxed">
+                  <p className="text-ink-soft font-serif text-xl leading-relaxed">
                     {report.summary}
                   </p>
                 </div>
@@ -138,7 +138,7 @@ export default function DupeShieldPage() {
                 <CatalogueNotice />
                 <div className="glass p-6 rounded-2xl border-white/5 flex items-start gap-4">
                   <AlertCircle size={20} className="shrink-0 text-amber mt-0.5" />
-                  <p className="text-sm text-white/50 font-serif leading-relaxed italic pr-4">
+                  <p className="text-sm text-ink-soft font-serif leading-relaxed italic pr-4">
                     Scores measure olfactory overlap, not identity. Skin chemistry
                     changes the drydown enough that a 90% match can still smell
                     distinctly different on you — always sample before committing.
@@ -168,17 +168,17 @@ function OriginalCard({ report }: { report: NonNullable<ReturnType<typeof useDup
 
   return (
     <div className="mb-14">
-      <p className="text-[11px] font-mono text-white/30 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+      <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
         <span className="w-8 h-px bg-white/20" /> Original Reference
       </p>
       <div className="glass p-8 md:p-10 rounded-3xl border-white/10 shadow-xl relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-rose/5 to-transparent pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
-            <h2 className="text-4xl text-white/90 font-serif font-light mb-2 tracking-tight">
+            <h2 className="text-4xl text-ink font-serif font-light mb-2 tracking-tight">
               {original.name}
             </h2>
-            <p className="text-white/50 font-mono text-sm tracking-widest uppercase mb-6">
+            <p className="text-ink-soft font-mono text-sm tracking-widest uppercase mb-6">
               {original.brand}
               {original.year ? ` · ${original.year}` : ''}
             </p>
@@ -195,18 +195,18 @@ function OriginalCard({ report }: { report: NonNullable<ReturnType<typeof useDup
           </div>
           <div className="md:text-right shrink-0 relative z-10">
             {typeof original.priceUSD === 'number' && (
-              <p className="text-5xl font-mono font-light text-white/90 mb-2">
+              <p className="text-5xl font-mono font-light text-ink mb-2">
                 ~${original.priceUSD}
               </p>
             )}
-            <p className="text-white/40 font-mono text-[11px] uppercase tracking-widest">
+            <p className="text-ink-faint font-mono text-[11px] uppercase tracking-widest">
               {original.family ?? original.concentration}
             </p>
           </div>
         </div>
       </div>
 
-      <p className="text-white/50 font-serif text-lg leading-relaxed mt-6 px-2">
+      <p className="text-ink-soft font-serif text-lg leading-relaxed mt-6 px-2">
         {report.summary}
       </p>
     </div>
@@ -221,7 +221,7 @@ function LoadingState() {
         transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
         className="w-16 h-16 rounded-full border border-white/5 border-t-rose border-r-rose/30 mx-auto mb-8"
       />
-      <p className="mt-6 text-white/40 font-mono text-[11px] uppercase tracking-[0.2em]">
+      <p className="mt-6 text-ink-faint font-mono text-[11px] uppercase tracking-[0.2em]">
         Scoring accord profiles…
       </p>
     </div>
@@ -234,7 +234,7 @@ function EmptyState({ onPick }: { onPick: (example: string) => void }) {
       <div className="w-24 h-24 rounded-full mx-auto mb-8 flex items-center justify-center bg-rose/5 border border-rose/10">
         <Sparkles size={32} className="text-rose/40" />
       </div>
-      <p className="text-white/30 font-mono text-[13px] uppercase tracking-widest mb-10">
+      <p className="text-ink-faint font-mono text-[13px] uppercase tracking-widest mb-10">
         Try one of these
       </p>
       <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto mb-12">
@@ -243,7 +243,7 @@ function EmptyState({ onPick }: { onPick: (example: string) => void }) {
             key={example}
             type="button"
             onClick={() => onPick(example)}
-            className="px-5 py-2.5 rounded-full text-[12px] font-mono transition-all duration-300 bg-white/[0.02] border border-white/5 text-white/50 hover:bg-white/10 hover:text-white/90 hover:border-white/20"
+            className="px-5 py-2.5 rounded-full text-[12px] font-mono transition-all duration-300 bg-white/[0.02] border border-white/5 text-ink-soft hover:bg-white/10 hover:text-ink hover:border-white/20"
           >
             {example}
           </button>

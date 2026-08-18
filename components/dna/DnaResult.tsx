@@ -23,10 +23,10 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
             Your ScentDNA™
           </span>
         </div>
-        <h1 className="text-4xl md:text-6xl text-white/90 mb-6 font-serif font-light tracking-tight max-w-4xl mx-auto leading-tight">
+        <h1 className="text-4xl md:text-6xl text-ink mb-6 font-serif font-light tracking-tight max-w-4xl mx-auto leading-tight">
           {profile.headline}
         </h1>
-        <p className="text-white/50 text-base max-w-2xl mx-auto leading-relaxed font-serif">
+        <p className="text-ink-soft text-base max-w-2xl mx-auto leading-relaxed font-serif">
           {profile.skinInsight}
         </p>
       </header>
@@ -47,10 +47,10 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
               label={`Skin chemistry score ${profile.skinChemistryScore} out of 100`}
             />
             <div>
-              <p className="text-white/90 font-serif text-2xl mb-2">
+              <p className="text-ink font-serif text-2xl mb-2">
                 Skin Chemistry Profile
               </p>
-              <p className="text-sm text-white/50 leading-relaxed">
+              <p className="text-sm text-ink-soft leading-relaxed">
                 How favourable your reported skin and climate are for fragrance
                 performance overall.
               </p>
@@ -75,7 +75,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
         <div className="glass p-10 rounded-3xl border-white/5">
-          <p className="text-[11px] font-mono text-white/30 uppercase tracking-[0.2em] mb-8">
+          <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-8">
             Accords That Excel On You
           </p>
           <div className="space-y-6">
@@ -91,10 +91,10 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
                   <span className="text-[13px] font-mono text-mint">{index + 1}</span>
                 </div>
                 <div className="pt-1">
-                  <h3 className="text-white/90 text-xl font-serif mb-2">
+                  <h3 className="text-ink text-xl font-serif mb-2">
                     {family.label}
                   </h3>
-                  <p className="text-white/40 text-[13px] leading-relaxed">
+                  <p className="text-ink-faint text-[13px] leading-relaxed">
                     {family.reason}
                   </p>
                 </div>
@@ -105,7 +105,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
 
         <div className="flex flex-col gap-6">
           <div className="glass p-10 rounded-3xl border-white/5 flex-grow">
-            <p className="text-[11px] font-mono text-white/30 uppercase tracking-[0.2em] mb-8">
+            <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-8">
               Signature Accords
             </p>
             <div className="flex flex-wrap gap-3">
@@ -122,7 +122,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
 
           {profile.worstFamilies.length > 0 && (
             <div className="glass p-10 rounded-3xl border-white/5">
-              <p className="text-[11px] font-mono text-white/30 uppercase tracking-[0.2em] mb-6">
+              <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-6">
                 Accords That Underperform
               </p>
               <div className="flex flex-wrap gap-3">
@@ -130,7 +130,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
                   <span
                     key={family.accord}
                     title={family.reason}
-                    className="px-5 py-2.5 rounded-full text-[11px] font-mono uppercase tracking-widest bg-white/5 text-white/30 border border-white/10"
+                    className="px-5 py-2.5 rounded-full text-[11px] font-mono uppercase tracking-widest bg-white/5 text-ink-faint border border-white/10"
                   >
                     {family.label}
                   </span>
@@ -147,7 +147,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
           <p className="text-[11px] font-mono text-mint/70 uppercase tracking-[0.2em] mb-4">
             Your Application Blueprint
           </p>
-          <p className="text-white/80 font-serif text-xl md:text-2xl leading-relaxed">
+          <p className="text-ink-muted font-serif text-xl md:text-2xl leading-relaxed">
             {profile.applicationTip}
           </p>
         </div>
@@ -159,7 +159,7 @@ export function DnaResult({ profile, answers, onRetake }: DnaResultProps) {
         <button
           type="button"
           onClick={onRetake}
-          className="px-10 py-4 w-full md:w-auto rounded-full font-mono text-[11px] uppercase tracking-[0.2em] text-white/40 border border-white/10 hover:bg-white/5 hover:text-white/80 transition-all duration-300"
+          className="px-10 py-4 w-full md:w-auto rounded-full font-mono text-[11px] uppercase tracking-[0.2em] text-ink-faint border border-white/10 hover:bg-white/5 hover:text-ink-muted transition-all duration-300"
         >
           Retake Analysis
         </button>
@@ -183,7 +183,7 @@ function StatCard({
 }) {
   return (
     <div className="glass p-8 rounded-3xl border-white/5">
-      <p className="text-[11px] font-mono text-white/30 uppercase tracking-[0.2em] mb-4">
+      <p className="text-[11px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-4">
         {label}
       </p>
       <div
@@ -193,7 +193,7 @@ function StatCard({
       >
         {value}
       </div>
-      <p className="text-[13px] text-white/50 leading-relaxed">{explanation}</p>
+      <p className="text-[13px] text-ink-soft leading-relaxed">{explanation}</p>
     </div>
   );
 }
@@ -211,13 +211,13 @@ function MethodologyDisclosure({ profile }: { profile: DnaProfile }) {
   return (
     <details className="glass rounded-3xl border-white/5 overflow-hidden group">
       <summary className="flex items-center gap-3 p-6 cursor-pointer list-none hover:bg-white/[0.02] transition-colors">
-        <Info size={16} className="text-white/40" />
-        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/50">
+        <Info size={16} className="text-ink-faint" />
+        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">
           How this profile was calculated
         </span>
       </summary>
 
-      <div className="px-6 pb-8 pt-2 space-y-5 text-[13px] leading-relaxed text-white/50 max-w-3xl">
+      <div className="px-6 pb-8 pt-2 space-y-5 text-[13px] leading-relaxed text-ink-soft max-w-3xl">
         <p>
           This is a deterministic profile, not a measurement. Your answers are run
           through a fixed rule table — the same answers always produce the same
@@ -225,7 +225,7 @@ function MethodologyDisclosure({ profile }: { profile: DnaProfile }) {
         </p>
 
         <div>
-          <p className="text-white/70 mb-2 font-mono text-[11px] uppercase tracking-wider">
+          <p className="text-ink-muted mb-2 font-mono text-[11px] uppercase tracking-wider">
             Weighted factors
           </p>
           <ul className="space-y-1.5 list-disc list-inside">
@@ -237,19 +237,19 @@ function MethodologyDisclosure({ profile }: { profile: DnaProfile }) {
 
         {anecdotal.length > 0 && (
           <div>
-            <p className="text-white/70 mb-2 font-mono text-[11px] uppercase tracking-wider">
+            <p className="text-ink-muted mb-2 font-mono text-[11px] uppercase tracking-wider">
               Collected but not weighted
             </p>
             {anecdotal.map((question) => (
               <p key={question.id}>
-                <span className="text-white/60">{question.question}</span> —{' '}
+                <span className="text-ink-soft">{question.question}</span> —{' '}
                 {question.rationale}
               </p>
             ))}
           </div>
         )}
 
-        <p className="text-white/40 italic">
+        <p className="text-ink-faint italic">
           Sebum content, skin temperature and humidity have well-established effects
           on how fragrance evaporates and how long it lasts. Nothing here diagnoses
           anything or replaces trying a fragrance on your own skin.

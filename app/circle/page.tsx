@@ -26,7 +26,7 @@ export default function ScentCirclePage() {
             <h1 className="text-3xl text-white" style={{ fontFamily: 'var(--font-serif)', fontWeight: 300 }}>
               P2P Fragrance Marketplace
             </h1>
-            <p className="text-white/40 text-sm mt-1">Swap, sell, and sample with the global fragrance community</p>
+            <p className="text-ink-faint text-sm mt-1">Swap, sell, and sample with the global fragrance community</p>
           </div>
           <motion.button
             whileHover={{ scale: 1.03 }}
@@ -55,16 +55,16 @@ export default function ScentCirclePage() {
                 >
                   {listing.type}
                 </span>
-                <span className="font-mono text-xs text-white/30">{listing.ml}ml</span>
+                <span className="font-mono text-xs text-ink-faint">{listing.ml}ml</span>
               </div>
 
               <h3 className="text-white font-medium mb-1" style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', lineHeight: 1.3 }}>{listing.title}</h3>
-              <p className="text-white/30 font-mono text-xs mb-3">{listing.user} · {listing.location}</p>
+              <p className="text-ink-faint font-mono text-xs mb-3">{listing.user} · {listing.location}</p>
 
               {listing.seeking && (
                 <div className="flex items-center gap-1.5 mb-3">
-                  <RefreshCw size={11} className="text-white/30" />
-                  <span className="text-xs text-white/40 font-mono">Seeking: {listing.seeking}</span>
+                  <RefreshCw size={11} className="text-ink-faint" />
+                  <span className="text-xs text-ink-faint font-mono">Seeking: {listing.seeking}</span>
                 </div>
               )}
 

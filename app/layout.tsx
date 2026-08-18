@@ -1,18 +1,36 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import PageTransition from "@/components/layout/PageTransition";
-import { QueryProvider } from "@/components/providers/QueryProvider";
+import type { Metadata, Viewport } from 'next';
+import './globals.css';
+import { fontVariables } from './fonts';
+import Navbar from '@/components/layout/Navbar';
+import PageTransition from '@/components/layout/PageTransition';
+import { QueryProvider } from '@/components/providers/QueryProvider';
 
 export const metadata: Metadata = {
-  title: "OLFRA™ — The Intelligence of Scent",
-  description: "The world's most advanced fragrance intelligence platform. AI-powered dupe detection, trend analytics, personalized scent profiling, and more.",
-  keywords: ["fragrance", "perfume", "AI", "dupe detection", "scent intelligence", "OLFRA"],
-  openGraph: {
-    title: "OLFRA™ — The Intelligence of Scent",
-    description: "AI-powered fragrance intelligence platform",
-    type: "website",
+  title: {
+    default: 'OLFRA™ — The Intelligence of Scent',
+    template: '%s · OLFRA™',
   },
+  description:
+    'Fragrance intelligence built on measurable chemistry. Dupe detection scored from accord structure, skin-chemistry profiling, and occasion matching — deterministic, explainable, and the same every time.',
+  keywords: [
+    'fragrance',
+    'perfume',
+    'dupe finder',
+    'fragrance similarity',
+    'scent profile',
+    'OLFRA',
+  ],
+  openGraph: {
+    title: 'OLFRA™ — The Intelligence of Scent',
+    description:
+      'Dupe detection scored from accord structure and drydown overlap. Deterministic, explainable, reproducible.',
+    type: 'website',
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#06080A',
+  colorScheme: 'dark',
 };
 
 export default function RootLayout({
@@ -21,17 +39,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body className="bg-[#080B0F] text-white antialiased">
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
+      {/* `.grain` paints a fixed film-grain layer over the whole document —
+          one static SVG rather than the per-frame canvas noise it replaces. */}
+      <body className="bg-obsidian text-ink antialiased grain">
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
+
         <QueryProvider>
           <Navbar />
-          <PageTransition>
-            {children}
-          </PageTransition>
+          <div id="main">
+            <PageTransition>{children}</PageTransition>
+          </div>
         </QueryProvider>
       </body>
     </html>

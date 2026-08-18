@@ -42,7 +42,7 @@ export default function ScentLayerPage() {
           <h1 className="text-4xl text-white mb-3 font-serif font-light">
             Master the art of <em className="text-amber not-italic font-serif italic">layering</em>
           </h1>
-          <p className="text-white/40 leading-relaxed">
+          <p className="text-ink-faint leading-relaxed">
             Scored on accord overlap, intensity balance and shared base notes.
             Identical scents score low — the goal is complement, not duplication.
           </p>
@@ -63,14 +63,14 @@ export default function ScentLayerPage() {
                   value={input.value}
                   onChange={(event) => input.set(event.target.value)}
                   placeholder={input.placeholder}
-                  className="w-full px-4 py-3 rounded-xl text-white placeholder-white/30 outline-none pr-10 bg-white/[0.05] border border-white/10 focus:border-amber/40 transition-colors text-sm"
+                  className="w-full px-4 py-3 rounded-xl text-white placeholder-ink-ghost outline-none pr-10 bg-white/[0.05] border border-white/10 focus:border-amber/40 transition-colors text-sm"
                 />
                 {input.value && (
                   <button
                     type="button"
                     aria-label={`Clear ${input.placeholder}`}
                     onClick={() => input.set('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-faint hover:text-ink-soft"
                   >
                     <X size={14} />
                   </button>
@@ -88,7 +88,7 @@ export default function ScentLayerPage() {
             className={`w-full py-3 rounded-xl font-mono text-sm uppercase tracking-wider transition-all ${
               canAnalyse
                 ? 'bg-gradient-to-br from-amber-light to-amber text-white cursor-pointer'
-                : 'bg-white/5 text-white/20 cursor-not-allowed'
+                : 'bg-white/5 text-ink-ghost cursor-not-allowed'
             }`}
           >
             {analysis.isPending ? 'Analysing…' : 'Test Compatibility →'}
@@ -114,14 +114,14 @@ export default function ScentLayerPage() {
                 >
                   {result.verdict}
                 </span>
-                <p className="text-white/50 font-mono text-xs mt-2">
+                <p className="text-ink-soft font-mono text-xs mt-2">
                   {result.first.name} + {result.second.name}
                 </p>
               </div>
               <ScoreRing score={result.compatibilityScore} size={84} />
             </div>
 
-            <p className="text-white/70 font-serif text-base leading-relaxed mb-6">
+            <p className="text-ink-muted font-serif text-base leading-relaxed mb-6">
               {result.description}
             </p>
 
@@ -133,27 +133,27 @@ export default function ScentLayerPage() {
                     className="flex items-start gap-3 p-4 rounded-xl bg-crimson/5 border border-crimson/20"
                   >
                     <AlertTriangle size={14} className="text-crimson shrink-0 mt-0.5" />
-                    <p className="text-white/60 text-[13px] leading-relaxed">{warning}</p>
+                    <p className="text-ink-soft text-[13px] leading-relaxed">{warning}</p>
                   </div>
                 ))}
               </div>
             )}
 
             <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 mb-6">
-              <p className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] mb-3">
+              <p className="text-[10px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-3">
                 Application Order
               </p>
-              <p className="text-white/80 font-serif text-lg mb-2">
+              <p className="text-ink-muted font-serif text-lg mb-2">
                 {result.applicationOrder.first} → wait{' '}
                 {result.applicationOrder.waitTime} → {result.applicationOrder.second}
               </p>
-              <p className="text-white/40 text-[13px] leading-relaxed">
+              <p className="text-ink-faint text-[13px] leading-relaxed">
                 {result.applicationOrder.reason}
               </p>
             </div>
 
             <div>
-              <p className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] mb-3">
+              <p className="text-[10px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-3">
                 Combined Accord Profile
               </p>
               <div className="flex flex-wrap gap-2">
@@ -171,7 +171,7 @@ export default function ScentLayerPage() {
         )}
 
         <div className="mt-8">
-          <p className="text-xs font-mono text-white/30 uppercase tracking-widest mb-3">
+          <p className="text-xs font-mono text-ink-faint uppercase tracking-widest mb-3">
             Try a pairing
           </p>
           <div className="space-y-2 mb-6">
@@ -186,10 +186,10 @@ export default function ScentLayerPage() {
                 }}
                 className="glass-card w-full p-4 flex items-center justify-between text-left hover:border-white/15 transition-colors"
               >
-                <span className="text-sm font-mono text-white/60">
-                  {a} <span className="text-white/20">+</span> {b}
+                <span className="text-sm font-mono text-ink-soft">
+                  {a} <span className="text-ink-ghost">+</span> {b}
                 </span>
-                <span className="text-xs font-mono text-white/30">Test →</span>
+                <span className="text-xs font-mono text-ink-faint">Test →</span>
               </button>
             ))}
           </div>

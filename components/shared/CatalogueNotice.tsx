@@ -20,9 +20,9 @@ export function CatalogueNotice({ className = '' }: { className?: string }) {
       className={`glass p-4 rounded-2xl border-white/5 flex items-start gap-3 ${className}`}
     >
       <Info size={16} className="shrink-0 text-amber/70 mt-0.5" />
-      <p className="text-[12px] text-white/50 leading-relaxed">
+      <p className="text-[12px] text-ink-soft leading-relaxed">
         Running on the built-in seed catalogue —{' '}
-        <span className="text-white/70">a curated set of well-known releases</span>, not
+        <span className="text-ink-muted">a curated set of well-known releases</span>, not
         the full database. Scores are computed the same way; only the pool of
         candidates is smaller. Connect a catalogue source to search the full set.
       </p>

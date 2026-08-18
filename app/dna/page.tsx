@@ -47,7 +47,7 @@ export default function ScentDnaPage() {
           <div className="mx-auto mb-10 flex justify-center">
             <DnaHelix answers={answers} />
           </div>
-          <p className="text-white/50 font-mono text-[11px] uppercase tracking-[0.2em]">
+          <p className="text-ink-soft font-mono text-[11px] uppercase tracking-[0.2em]">
             Computing your profile…
           </p>
         </div>
@@ -72,11 +72,11 @@ export default function ScentDnaPage() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Dna size={16} className="text-mint" />
-              <span className="font-mono text-[10px] text-white/40 uppercase tracking-[0.2em]">
+              <span className="font-mono text-[10px] text-ink-faint uppercase tracking-[0.2em]">
                 ScentDNA™
               </span>
             </div>
-            <span className="font-mono text-[10px] text-white/40 tracking-[0.2em]">
+            <span className="font-mono text-[10px] text-ink-faint tracking-[0.2em]">
               STEP {step + 1} OF {total}
             </span>
           </div>
@@ -115,10 +115,10 @@ export default function ScentDnaPage() {
           >
             <div className="text-center mb-12">
               <div className="text-6xl md:text-7xl mb-8">{currentQuestion.emoji}</div>
-              <h2 className="text-3xl md:text-5xl text-white/90 font-serif font-light tracking-tight max-w-2xl mx-auto leading-tight mb-5">
+              <h2 className="text-3xl md:text-5xl text-ink font-serif font-light tracking-tight max-w-2xl mx-auto leading-tight mb-5">
                 {currentQuestion.question}
               </h2>
-              <p className="text-white/35 text-[13px] max-w-xl mx-auto leading-relaxed">
+              <p className="text-ink-faint text-[13px] max-w-xl mx-auto leading-relaxed">
                 {currentQuestion.rationale}
               </p>
             </div>
@@ -136,7 +136,7 @@ export default function ScentDnaPage() {
                     className={`py-6 px-8 rounded-3xl font-serif text-xl tracking-wide text-center transition-all duration-300 border ${
                       selected
                         ? 'bg-mint/10 border-mint/40 text-mint'
-                        : 'bg-white/[0.02] border-white/5 text-white/70 hover:bg-mint/5 hover:border-mint/30 hover:text-mint'
+                        : 'bg-white/[0.02] border-white/5 text-ink-muted hover:bg-mint/5 hover:border-mint/30 hover:text-mint'
                     }`}
                   >
                     {option}
@@ -149,7 +149,7 @@ export default function ScentDnaPage() {
               <button
                 type="button"
                 onClick={() => setStep(step - 1)}
-                className="flex items-center gap-3 mx-auto mt-12 text-white/30 hover:text-white/70 transition-colors font-mono text-[11px] uppercase tracking-[0.2em] px-6 py-2 rounded-full hover:bg-white/5"
+                className="flex items-center gap-3 mx-auto mt-12 text-ink-faint hover:text-ink-muted transition-colors font-mono text-[11px] uppercase tracking-[0.2em] px-6 py-2 rounded-full hover:bg-white/5"
               >
                 <ChevronLeft size={14} /> Previous Step
               </button>

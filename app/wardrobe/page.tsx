@@ -80,7 +80,7 @@ export default function WardrobePage() {
 
         {!hydrated ? (
           <div className="glass-card p-12 text-center">
-            <p className="text-white/30 font-mono text-xs uppercase tracking-widest">
+            <p className="text-ink-faint font-mono text-xs uppercase tracking-widest">
               Loading your collection…
             </p>
           </div>
@@ -107,7 +107,7 @@ export default function WardrobePage() {
                         <h3 className="text-white font-serif text-lg truncate">
                           {bottle.name}
                         </h3>
-                        <p className="text-white/40 font-mono text-xs truncate">
+                        <p className="text-ink-faint font-mono text-xs truncate">
                           {bottle.brand}
                           {bottle.concentration && bottle.concentration !== 'Unknown'
                             ? ` · ${bottle.concentration}`
@@ -118,7 +118,7 @@ export default function WardrobePage() {
                       <button
                         type="button"
                         onClick={() => removeBottle(bottle.id)}
-                        className="text-white/20 hover:text-crimson transition-colors shrink-0 p-1"
+                        className="text-ink-ghost hover:text-crimson transition-colors shrink-0 p-1"
                         aria-label={`Remove ${bottle.name} from wardrobe`}
                       >
                         <Trash2 size={14} />
@@ -143,8 +143,8 @@ export default function WardrobePage() {
 
                     {typeof bottle.purchasePrice === 'number' && (
                       <div className="flex items-baseline gap-2">
-                        <span className="text-xs font-mono text-white/30">Paid</span>
-                        <span className="font-mono text-white/70">
+                        <span className="text-xs font-mono text-ink-faint">Paid</span>
+                        <span className="font-mono text-ink-muted">
                           ${bottle.purchasePrice}
                         </span>
                       </div>
@@ -157,7 +157,7 @@ export default function WardrobePage() {
         )}
 
         {hydrated && bottles.length > 0 && (
-          <p className="mt-8 text-white/25 text-[12px] leading-relaxed">
+          <p className="mt-8 text-ink-ghost text-[12px] leading-relaxed">
             Saved in this browser only. Sign-in and cross-device sync arrive with
             accounts — see the roadmap.
           </p>
@@ -182,7 +182,7 @@ function StatTile({
 }) {
   return (
     <div className="glass-card p-4 text-center">
-      <div className="text-xs font-mono text-white/30 uppercase mb-1">{label}</div>
+      <div className="text-xs font-mono text-ink-faint uppercase mb-1">{label}</div>
       <div
         className={`font-mono font-medium truncate ${small ? 'text-sm' : 'text-xl'}`}
         style={{ color }}
@@ -199,8 +199,8 @@ function EmptyState({ onAdd }: { onAdd: () => void }) {
       <div className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center bg-amber/5 border border-amber/15">
         <ShoppingBag size={24} className="text-amber/50" />
       </div>
-      <p className="text-white/60 font-serif text-xl mb-2">Nothing here yet</p>
-      <p className="text-white/35 text-sm mb-8 max-w-sm mx-auto leading-relaxed">
+      <p className="text-ink-soft font-serif text-xl mb-2">Nothing here yet</p>
+      <p className="text-ink-faint text-sm mb-8 max-w-sm mx-auto leading-relaxed">
         Add the bottles you own to track what you have paid, see which families you
         gravitate toward, and check new finds against your collection.
       </p>

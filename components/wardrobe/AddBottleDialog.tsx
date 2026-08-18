@@ -81,12 +81,12 @@ export function AddBottleDialog({
             className="fixed inset-x-4 top-[10%] z-50 mx-auto max-w-lg max-h-[80vh] overflow-y-auto rounded-3xl bg-obsidian-2 border border-white/10 shadow-2xl"
           >
             <div className="flex items-center justify-between p-6 border-b border-white/5">
-              <h2 className="font-serif text-xl text-white/90">Add a bottle</h2>
+              <h2 className="font-serif text-xl text-ink">Add a bottle</h2>
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="w-8 h-8 flex items-center justify-center rounded-full border border-white/10 text-white/40 hover:text-white hover:bg-white/5 transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-full border border-white/10 text-ink-faint hover:text-white hover:bg-white/5 transition-colors"
               >
                 <X size={14} />
               </button>
@@ -96,8 +96,8 @@ export function AddBottleDialog({
               {selected ? (
                 <div className="flex items-center justify-between p-4 rounded-2xl bg-amber/5 border border-amber/20">
                   <div>
-                    <p className="text-white/90 font-serif text-lg">{selected.name}</p>
-                    <p className="text-white/40 font-mono text-xs">
+                    <p className="text-ink font-serif text-lg">{selected.name}</p>
+                    <p className="text-ink-faint font-mono text-xs">
                       {selected.brand}
                       {selected.concentration !== 'Unknown' && ` · ${selected.concentration}`}
                     </p>
@@ -105,7 +105,7 @@ export function AddBottleDialog({
                   <button
                     type="button"
                     onClick={() => setSelected(null)}
-                    className="text-white/30 hover:text-white/70 text-xs font-mono"
+                    className="text-ink-faint hover:text-ink-muted text-xs font-mono"
                   >
                     Change
                   </button>
@@ -114,14 +114,14 @@ export function AddBottleDialog({
                 <div>
                   <label
                     htmlFor="bottle-search"
-                    className="block font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2"
+                    className="block font-mono text-[10px] uppercase tracking-[0.2em] text-ink-faint mb-2"
                   >
                     Search the catalogue
                   </label>
                   <div className="relative">
                     <Search
                       size={16}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-faint pointer-events-none"
                     />
                     <input
                       id="bottle-search"
@@ -129,12 +129,12 @@ export function AddBottleDialog({
                       onChange={(event) => setQuery(event.target.value)}
                       placeholder="e.g. Layton"
                       autoComplete="off"
-                      className="w-full pl-11 pr-10 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white/90 placeholder-white/25 outline-none focus:border-amber/40 text-sm"
+                      className="w-full pl-11 pr-10 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-ink placeholder-ink-ghost outline-none focus:border-amber/40 text-sm"
                     />
                     {search.isFetching && (
                       <Loader2
                         size={14}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 animate-spin"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-faint animate-spin"
                       />
                     )}
                   </div>
@@ -151,10 +151,10 @@ export function AddBottleDialog({
                             }}
                             className="w-full text-left px-4 py-3 hover:bg-white/5 transition-colors"
                           >
-                            <span className="text-white/80 text-sm block">
+                            <span className="text-ink-muted text-sm block">
                               {fragrance.name}
                             </span>
-                            <span className="text-white/35 font-mono text-[11px]">
+                            <span className="text-ink-faint font-mono text-[11px]">
                               {fragrance.brand}
                             </span>
                           </button>
@@ -166,7 +166,7 @@ export function AddBottleDialog({
                   {query.trim().length >= 2 &&
                     search.data?.results.length === 0 &&
                     !search.isFetching && (
-                      <p className="mt-3 text-white/35 text-[12px] leading-relaxed">
+                      <p className="mt-3 text-ink-faint text-[12px] leading-relaxed">
                         Not in the catalogue — add it by hand below.
                       </p>
                     )}
@@ -245,7 +245,7 @@ function Field({
     <div>
       <label
         htmlFor={id}
-        className="block font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2"
+        className="block font-mono text-[10px] uppercase tracking-[0.2em] text-ink-faint mb-2"
       >
         {label}
       </label>
@@ -256,7 +256,7 @@ function Field({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white/90 placeholder-white/25 outline-none focus:border-amber/40 text-sm"
+        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-ink placeholder-ink-ghost outline-none focus:border-amber/40 text-sm"
       />
     </div>
   );

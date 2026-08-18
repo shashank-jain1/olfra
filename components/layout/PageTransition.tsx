@@ -1,61 +1,38 @@
 'use client';
-import type { TargetAndTransition } from 'framer-motion';
-import { motion, AnimatePresence } from 'framer-motion';
+
+import { motion, useReducedMotion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
-type TransitionDef = { initial: TargetAndTransition; animate: TargetAndTransition; exit: TargetAndTransition };
-const transitions: Record<string, TransitionDef> = {
-  '/dupeshield': {
-    initial: { opacity: 0, backgroundColor: 'rgba(192,57,43,0.1)' },
-    animate: { opacity: 1, backgroundColor: 'transparent' },
-    exit: { opacity: 0, y: -10 },
-  },
-  '/culture': {
-    initial: { opacity: 0, scale: 0.97 },
-    animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.97 },
-  },
-  '/moment': {
-    initial: { opacity: 0, x: -30 },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: 30 },
-  },
-  '/dna': {
-    initial: { opacity: 0, scale: 1.02 },
-    animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.98 },
-  },
-  default: {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -10 },
-  },
-};
-
-function getTransition(pathname: string) {
-  for (const key of Object.keys(transitions)) {
-    if (key !== 'default' && pathname.startsWith(key)) {
-      return transitions[key];
-    }
-  }
-  return transitions.default;
-}
-
-export default function PageTransition({ children }: { children: React.ReactNode }) {
+/**
+ * Page-entry animation.
+ *
+ * Rewritten from an `AnimatePresence mode="wait"` wrapper, which had three
+ * problems: every navigation waited for the outgoing page's exit animation
+ * to finish before the new page painted (a deliberate ~500ms delay on each
+ * click), each route used a different direction so navigation felt
+ * inconsistent, and it ignored prefers-reduced-motion entirely.
+ *
+ * Now the incoming page animates on its own — no exit gate, no wait — with
+ * a single direction across the app so movement reads as one system.
+ */
+export default function PageTransition({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
-  const t = getTransition(pathname);
+  const reduceMotion = useReducedMotion();
+
+  if (reduceMotion) return <>{children}</>;
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={pathname}
-        initial={t.initial}
-        animate={t.animate}
-        exit={t.exit}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      key={pathname}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
   );
 }

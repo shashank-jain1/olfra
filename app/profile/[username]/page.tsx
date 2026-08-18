@@ -48,8 +48,8 @@ export default function ProfilePage() {
             </div>
             <div className="flex-1 min-w-0">
               <h1 className="text-2xl text-white" style={{ fontFamily: 'var(--font-serif)', fontWeight: 300 }}>{p.displayName}</h1>
-              <p className="text-white/40 font-mono text-xs mt-0.5">@{p.username} · {p.location}</p>
-              <p className="text-white/60 text-sm mt-2" style={{ fontFamily: 'var(--font-serif)' }}>{p.bio}</p>
+              <p className="text-ink-faint font-mono text-xs mt-0.5">@{p.username} · {p.location}</p>
+              <p className="text-ink-soft text-sm mt-2" style={{ fontFamily: 'var(--font-serif)' }}>{p.bio}</p>
             </div>
           </div>
 
@@ -63,7 +63,7 @@ export default function ProfilePage() {
             ].map((s) => (
               <div key={s.label} className="text-center">
                 <div className="text-xl font-mono font-medium text-white">{s.value}</div>
-                <div className="flex items-center justify-center gap-1 mt-1 text-white/30" style={{ fontFamily: 'var(--font-mono)', fontSize: '10px' }}>
+                <div className="flex items-center justify-center gap-1 mt-1 text-ink-faint" style={{ fontFamily: 'var(--font-mono)', fontSize: '10px' }}>
                   {s.icon} {s.label}
                 </div>
               </div>
@@ -76,7 +76,7 @@ export default function ProfilePage() {
           <div className="flex items-center gap-3">
             <Dna size={20} style={{ color: '#2FFFA8' }} />
             <div>
-              <p className="text-xs font-mono text-white/30 uppercase">ScentDNA Profile</p>
+              <p className="text-xs font-mono text-ink-faint uppercase">ScentDNA Profile</p>
               <p className="text-white font-medium mt-0.5" style={{ fontFamily: 'var(--font-serif)' }}>{p.dna.profile}</p>
             </div>
             <div className="ml-auto font-mono font-medium text-2xl" style={{ color: '#2FFFA8' }}>{p.dna.score}</div>
@@ -85,16 +85,16 @@ export default function ProfilePage() {
 
         {/* Recent Fragrances */}
         <div className="glass-card p-5">
-          <p className="text-xs font-mono text-white/30 uppercase mb-4">Recent Fragrances</p>
+          <p className="text-xs font-mono text-ink-faint uppercase mb-4">Recent Fragrances</p>
           <div className="space-y-3">
             {p.recentFragrances.map((f, i) => (
               <motion.div key={f.name} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08 }} className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white/20" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-ink-ghost" style={{ background: 'rgba(255,255,255,0.05)' }}>
                   <Star size={12} />
                 </div>
                 <div>
                   <p className="text-sm text-white" style={{ fontFamily: 'var(--font-serif)' }}>{f.name}</p>
-                  <p className="text-xs text-white/30 font-mono">{f.brand}</p>
+                  <p className="text-xs text-ink-faint font-mono">{f.brand}</p>
                 </div>
               </motion.div>
             ))}

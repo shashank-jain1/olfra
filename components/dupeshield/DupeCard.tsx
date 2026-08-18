@@ -36,10 +36,10 @@ export function DupeCard({ match, index }: DupeCardProps) {
             <span className="inline-block text-[10px] px-3 py-1 rounded-full font-mono uppercase tracking-[0.1em] bg-amber/10 text-amber border border-amber/20 mb-3">
               {match.verdict}
             </span>
-            <h3 className="text-white/90 font-serif text-2xl tracking-wide mb-1 group-hover:text-white transition-colors">
+            <h3 className="text-ink font-serif text-2xl tracking-wide mb-1 group-hover:text-white transition-colors">
               {fragrance.name}
             </h3>
-            <p className="text-white/50 text-[13px] font-mono tracking-wider">
+            <p className="text-ink-soft text-[13px] font-mono tracking-wider">
               {fragrance.brand}
               {fragrance.concentration !== 'Unknown' && ` · ${fragrance.concentration}`}
             </p>
@@ -49,7 +49,7 @@ export function DupeCard({ match, index }: DupeCardProps) {
             <ScoreRing score={match.score} />
             {typeof fragrance.priceUSD === 'number' && (
               <div className="text-right">
-                <p className="font-mono text-white/90 text-lg mb-0.5">
+                <p className="font-mono text-ink text-lg mb-0.5">
                   ~${fragrance.priceUSD}
                 </p>
                 {match.savingsUSD !== undefined && (
@@ -67,7 +67,7 @@ export function DupeCard({ match, index }: DupeCardProps) {
             {match.sharedNotes.slice(0, 5).map((note) => (
               <span
                 key={note}
-                className="text-[11px] px-3 py-1 rounded-full font-mono bg-white/5 text-white/60 border border-white/10"
+                className="text-[11px] px-3 py-1 rounded-full font-mono bg-white/5 text-ink-soft border border-white/10"
               >
                 {note}
               </span>
@@ -85,7 +85,7 @@ export function DupeCard({ match, index }: DupeCardProps) {
               className="overflow-hidden relative z-10"
             >
               <div className="mt-6 pt-5 border-t border-white/5">
-                <p className="text-white/60 font-serif text-lg leading-relaxed italic mb-6">
+                <p className="text-ink-soft font-serif text-lg leading-relaxed italic mb-6">
                   {match.explanation}
                 </p>
                 <ScoreBreakdown breakdown={match.breakdown} />
@@ -97,7 +97,7 @@ export function DupeCard({ match, index }: DupeCardProps) {
         <div className="absolute bottom-4 right-6 z-10 pointer-events-none">
           <ChevronDown
             size={18}
-            className="text-white/20 transition-transform duration-500 group-hover:text-white/40"
+            className="text-ink-ghost transition-transform duration-500 group-hover:text-ink-faint"
             style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
           />
         </div>
@@ -117,13 +117,13 @@ function ScoreBreakdown({ breakdown }: { breakdown: DupeMatch['breakdown'] }) {
 
   return (
     <div>
-      <p className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] mb-4">
+      <p className="text-[10px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-4">
         How this score was calculated
       </p>
       <div className="space-y-3">
         {rows.map((row) => (
           <div key={row.label} className="flex items-center gap-4">
-            <span className="text-[11px] font-mono text-white/40 w-36 shrink-0">
+            <span className="text-[11px] font-mono text-ink-faint w-36 shrink-0">
               {row.label}
             </span>
             <div className="flex-1 h-1 rounded-full overflow-hidden bg-white/5">
@@ -132,10 +132,10 @@ function ScoreBreakdown({ breakdown }: { breakdown: DupeMatch['breakdown'] }) {
                 style={{ width: `${Math.round(row.value * 100)}%` }}
               />
             </div>
-            <span className="text-[11px] font-mono text-white/50 w-10 text-right">
+            <span className="text-[11px] font-mono text-ink-soft w-10 text-right">
               {Math.round(row.value * 100)}%
             </span>
-            <span className="text-[10px] font-mono text-white/20 w-10 text-right">
+            <span className="text-[10px] font-mono text-ink-ghost w-10 text-right">
               ×{row.weight}
             </span>
           </div>

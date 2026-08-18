@@ -41,15 +41,15 @@ export default function SettingsPage() {
           className="mb-14"
         >
           <div className="flex items-center gap-3 mb-6">
-            <Settings size={16} className="text-white/40" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
+            <Settings size={16} className="text-ink-faint" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-faint">
               System Status
             </span>
           </div>
-          <h1 className="text-5xl font-serif font-light text-white/90 tracking-tight mb-4">
+          <h1 className="text-5xl font-serif font-light text-ink tracking-tight mb-4">
             What&apos;s running
           </h1>
-          <p className="text-white/40 text-lg font-light leading-relaxed">
+          <p className="text-ink-faint text-lg font-light leading-relaxed">
             OLFRA works with no configuration at all — the scoring engines are
             deterministic and run locally. Connecting services widens the
             catalogue and unlocks the two features that need a vision model.
@@ -86,10 +86,10 @@ export default function SettingsPage() {
         </section>
 
         <section className="glass p-8 rounded-3xl border-white/5 mb-8">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30 mb-6">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-faint mb-6">
             Your local data
           </h2>
-          <p className="text-white/40 text-[13px] leading-relaxed mb-6">
+          <p className="text-ink-faint text-[13px] leading-relaxed mb-6">
             Your wardrobe and ScentDNA profile are stored in this browser only.
             Nothing is sent anywhere, and clearing them here is permanent.
           </p>
@@ -115,7 +115,7 @@ export default function SettingsPage() {
         </section>
 
         <section className="glass p-8 rounded-3xl border-white/5">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30 mb-6">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-faint mb-6">
             How credentials are handled
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-[13px]">
@@ -137,11 +137,11 @@ export default function SettingsPage() {
               },
             ].map((item) => (
               <div key={item.step}>
-                <span className="font-mono text-[10px] text-white/20 tracking-[0.2em] mb-3 block">
+                <span className="font-mono text-[10px] text-ink-ghost tracking-[0.2em] mb-3 block">
                   {item.step}
                 </span>
-                <h3 className="text-white/80 font-serif text-base mb-2">{item.title}</h3>
-                <p className="text-white/40 leading-relaxed">{item.desc}</p>
+                <h3 className="text-ink-muted font-serif text-base mb-2">{item.title}</h3>
+                <p className="text-ink-faint leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -157,8 +157,8 @@ const STATUS_STYLES: Record<CapabilityStatus, { label: string; className: string
   on: { label: 'Connected', className: 'bg-mint/10 text-mint border-mint/20' },
   'always-on': { label: 'Always on', className: 'bg-mint/10 text-mint border-mint/20' },
   seed: { label: 'Seed data', className: 'bg-amber/10 text-amber border-amber/20' },
-  off: { label: 'Not configured', className: 'bg-white/5 text-white/30 border-white/10' },
-  loading: { label: 'Checking…', className: 'bg-white/5 text-white/30 border-white/10' },
+  off: { label: 'Not configured', className: 'bg-white/5 text-ink-faint border-white/10' },
+  loading: { label: 'Checking…', className: 'bg-white/5 text-ink-faint border-white/10' },
 };
 
 function CapabilityRow({
@@ -182,11 +182,11 @@ function CapabilityRow({
           active ? 'bg-mint/10 border-mint/25' : 'bg-white/5 border-white/10'
         }`}
       >
-        <Icon size={17} className={active ? 'text-mint' : 'text-white/40'} />
+        <Icon size={17} className={active ? 'text-mint' : 'text-ink-faint'} />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-3 mb-2 flex-wrap">
-          <h3 className="text-white/90 font-serif text-lg">{title}</h3>
+          <h3 className="text-ink font-serif text-lg">{title}</h3>
           <span
             className={`text-[9px] font-mono px-2.5 py-1 rounded-full uppercase tracking-widest border inline-flex items-center gap-1.5 ${style.className}`}
           >
@@ -194,7 +194,7 @@ function CapabilityRow({
             {style.label}
           </span>
         </div>
-        <p className="text-white/40 text-[13px] leading-relaxed">{detail}</p>
+        <p className="text-ink-faint text-[13px] leading-relaxed">{detail}</p>
       </div>
     </div>
   );
@@ -214,14 +214,14 @@ function LocalDataRow({
   return (
     <div className="flex items-center justify-between p-4 rounded-2xl bg-white/[0.02] border border-white/5">
       <div>
-        <p className="text-white/70 text-sm">{label}</p>
-        <p className="text-white/30 font-mono text-xs mt-0.5">{value}</p>
+        <p className="text-ink-muted text-sm">{label}</p>
+        <p className="text-ink-faint font-mono text-xs mt-0.5">{value}</p>
       </div>
       <button
         type="button"
         onClick={onClear}
         disabled={disabled}
-        className="flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-mono uppercase tracking-widest border border-white/10 text-white/40 hover:text-crimson hover:border-crimson/30 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
+        className="flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-mono uppercase tracking-widest border border-white/10 text-ink-faint hover:text-crimson hover:border-crimson/30 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
       >
         <Trash2 size={11} /> Clear
       </button>

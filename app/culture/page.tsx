@@ -52,10 +52,10 @@ export default function ScentCulturePage() {
             <Globe size={18} className="text-lime" />
             <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-lime">ScentCulture™</span>
           </div>
-          <h1 className="text-5xl md:text-6xl text-white/90 mb-6 font-serif font-light tracking-tight">
+          <h1 className="text-5xl md:text-6xl text-ink mb-6 font-serif font-light tracking-tight">
             What the world is <em className="text-lime italic pr-1">smelling</em> right now
           </h1>
-          <p className="text-white/40 text-lg font-light tracking-wide max-w-2xl mx-auto">
+          <p className="text-ink-faint text-lg font-light tracking-wide max-w-2xl mx-auto">
             Real-time fragrance trend intelligence across 12 global cities
           </p>
         </motion.div>
@@ -111,7 +111,7 @@ export default function ScentCulturePage() {
                     transition={{ duration: 0.2 }}
                     className={`absolute bottom-6 left-1/2 z-20 whitespace-nowrap px-4 py-2.5 rounded-xl text-xs -translate-x-1/2 bg-obsidian-3/95 border backdrop-blur-md shadow-2xl ${city.borderClass}`}
                   >
-                    <div className="font-medium text-white/90 font-serif text-sm tracking-wide mb-1">{city.name}</div>
+                    <div className="font-medium text-ink font-serif text-sm tracking-wide mb-1">{city.name}</div>
                     <div className={`${city.colorClass} text-[10px] font-mono uppercase tracking-wider`}>↑ {city.trend}</div>
                   </motion.div>
                 )}
@@ -132,14 +132,14 @@ export default function ScentCulturePage() {
             >
               <div className="flex items-start justify-between mb-8">
                 <div>
-                  <h3 className="text-3xl text-white/90 font-serif font-light mb-2">{selectedCity.name}</h3>
-                  <p className="text-[10px] font-mono text-white/40 uppercase tracking-[0.15em]">This Week&apos;s Trend</p>
+                  <h3 className="text-3xl text-ink font-serif font-light mb-2">{selectedCity.name}</h3>
+                  <p className="text-[10px] font-mono text-ink-faint uppercase tracking-[0.15em]">This Week&apos;s Trend</p>
                 </div>
                 <button 
                   onClick={() => setSelectedCity(null)} 
                   className="w-8 h-8 flex items-center justify-center rounded-full glass border border-white/10 hover:bg-white/10 transition-colors"
                 >
-                  <X size={14} className="text-white/50" />
+                  <X size={14} className="text-ink-soft" />
                 </button>
               </div>
 
@@ -147,16 +147,16 @@ export default function ScentCulturePage() {
                 <div className={`text-2xl mb-3 font-serif italic ${selectedCity.colorClass}`}>
                   {selectedCity.trend}
                 </div>
-                <div className="text-[11px] font-mono text-white/40 uppercase tracking-widest flex items-center gap-2">
-                  Velocity: <span className="text-white/70">{selectedCity.velocity === 'fast' ? '🔥 Hot' : selectedCity.velocity === 'medium' ? '📈 Rising' : '📊 Steady'}</span>
+                <div className="text-[11px] font-mono text-ink-faint uppercase tracking-widest flex items-center gap-2">
+                  Velocity: <span className="text-ink-muted">{selectedCity.velocity === 'fast' ? '🔥 Hot' : selectedCity.velocity === 'medium' ? '📈 Rising' : '📊 Steady'}</span>
                 </div>
               </div>
 
               <div className="space-y-1">
                 {['Top 5 Fragrances', 'Regional Shoppers', 'Age Distribution'].map((item) => (
-                  <div key={item} className="text-[11px] font-mono text-white/30 flex items-center justify-between py-4 border-b border-white/5 uppercase tracking-wider">
+                  <div key={item} className="text-[11px] font-mono text-ink-faint flex items-center justify-between py-4 border-b border-white/5 uppercase tracking-wider">
                     <span>{item}</span>
-                    <span className="text-white/10 text-[9px]">Coming soon</span>
+                    <span className="text-ink-ghost text-[9px]">Coming soon</span>
                   </div>
                 ))}
               </div>
@@ -171,7 +171,7 @@ export default function ScentCulturePage() {
           <div>
             <div className="flex items-center gap-3 mb-6 px-1">
               <TrendingUp size={18} className="text-lime" />
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/50">Trending Notes</h2>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">Trending Notes</h2>
             </div>
             <div className="space-y-3">
               {TRENDING_NOTES.map((note, i) => (
@@ -184,8 +184,8 @@ export default function ScentCulturePage() {
                   className="glass p-5 rounded-xl flex items-center justify-between border-white/5 hover:border-white/10 hover:bg-white/[0.02] transition-colors"
                 >
                   <div>
-                    <span className="text-white/90 font-serif text-lg tracking-wide">{note.name}</span>
-                    <span className="text-white/30 text-[11px] uppercase tracking-wider ml-4 font-mono">{note.family}</span>
+                    <span className="text-ink font-serif text-lg tracking-wide">{note.name}</span>
+                    <span className="text-ink-faint text-[11px] uppercase tracking-wider ml-4 font-mono">{note.family}</span>
                   </div>
                   <span
                     className={`font-mono text-[13px] tracking-wider ${note.positive ? 'text-mint' : 'text-crimson'}`}
@@ -201,7 +201,7 @@ export default function ScentCulturePage() {
           <div>
             <div className="flex items-center gap-3 mb-6 px-1">
               <Users size={18} className="text-lime" />
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/50">Demographic Intel</h2>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">Demographic Intel</h2>
             </div>
 
             <div className="flex flex-wrap gap-2 mb-6">
@@ -212,7 +212,7 @@ export default function ScentCulturePage() {
                   className={`px-5 py-2.5 rounded-full text-[11px] font-mono uppercase tracking-widest transition-all duration-300 border ${
                     activeDemographic === i 
                       ? 'bg-lime/10 text-lime border-lime/30 shadow-[0_0_15px_rgba(168,204,44,0.1)]' 
-                      : 'bg-white/5 text-white/40 border-transparent hover:bg-white/10 hover:text-white/70'
+                      : 'bg-white/5 text-ink-faint border-transparent hover:bg-white/10 hover:text-ink-muted'
                   }`}
                 >
                   {d.label}
@@ -221,7 +221,7 @@ export default function ScentCulturePage() {
             </div>
 
             <div className="glass p-8 rounded-2xl border-white/5">
-              <p className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] mb-2">Top Family</p>
+              <p className="text-[10px] font-mono text-ink-faint uppercase tracking-[0.2em] mb-2">Top Family</p>
               <p className="text-3xl mb-8 font-serif font-light text-lime">
                 {DEMOGRAPHICS[activeDemographic].top}
               </p>
@@ -229,7 +229,7 @@ export default function ScentCulturePage() {
               <div className="space-y-5">
                 {FAMILIES.map((fam, idx) => (
                   <div key={fam} className="flex items-center gap-4">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-white/40 w-24 shrink-0">{fam}</span>
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-ink-faint w-24 shrink-0">{fam}</span>
                     <div className="flex-1 h-1.5 rounded-full overflow-hidden bg-white/5">
                       <motion.div
                         initial={{ width: 0 }}
@@ -238,7 +238,7 @@ export default function ScentCulturePage() {
                         className={`h-full rounded-full ${FAMILY_COLORS[idx]}`}
                       />
                     </div>
-                    <span className="text-[11px] font-mono text-white/40 w-10 text-right">
+                    <span className="text-[11px] font-mono text-ink-faint w-10 text-right">
                       {DEMOGRAPHICS[activeDemographic].data[idx]}%
                     </span>
                   </div>
@@ -252,7 +252,7 @@ export default function ScentCulturePage() {
         <div className="pb-10">
           <div className="flex items-center gap-3 mb-6 px-1">
             <BarChart2 size={18} className="text-lime" />
-            <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/50">AI Weekly Report</h2>
+            <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">AI Weekly Report</h2>
           </div>
 
           <div className="glass p-10 md:p-14 rounded-3xl relative overflow-hidden border-white/5">
@@ -270,7 +270,7 @@ export default function ScentCulturePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-white/60 leading-loose font-serif text-lg md:text-xl tracking-wide"
+                  className="text-ink-soft leading-loose font-serif text-lg md:text-xl tracking-wide"
                 >
                   {para}
                 </motion.p>
@@ -281,7 +281,7 @@ export default function ScentCulturePage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.6, duration: 0.8 }}
-                className="text-2xl md:text-3xl text-white/90 italic pl-8 py-4 my-10 border-l-4 border-lime/50 font-serif leading-tight bg-gradient-to-r from-lime/5 to-transparent rounded-r-2xl"
+                className="text-2xl md:text-3xl text-ink italic pl-8 py-4 my-10 border-l-4 border-lime/50 font-serif leading-tight bg-gradient-to-r from-lime/5 to-transparent rounded-r-2xl"
               >
                 &ldquo;The nose of 2026 is neither loud nor silent — it is precisely calibrated.&rdquo;
               </motion.blockquote>

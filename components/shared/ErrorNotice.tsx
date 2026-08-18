@@ -33,11 +33,11 @@ export function ErrorNotice({ error, onRetry, className = '' }: ErrorNoticeProps
     >
       <AlertTriangle size={20} className="shrink-0 text-rose mt-1" />
       <div className="flex-1">
-        <p className="text-white/80 font-serif text-lg leading-relaxed mb-1">
+        <p className="text-ink-muted font-serif text-lg leading-relaxed mb-1">
           {message}
         </p>
         {apiError?.code === 'fragrance_not_found' && (
-          <p className="text-white/40 text-[13px] leading-relaxed">
+          <p className="text-ink-faint text-[13px] leading-relaxed">
             Try the full name including the house, e.g. “Parfums de Marly Layton”.
           </p>
         )}
@@ -45,7 +45,7 @@ export function ErrorNotice({ error, onRetry, className = '' }: ErrorNoticeProps
           <button
             type="button"
             onClick={onRetry}
-            className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] font-mono uppercase tracking-[0.15em] text-white/60 border border-white/10 hover:bg-white/5 hover:text-white/90 transition-all"
+            className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] font-mono uppercase tracking-[0.15em] text-ink-soft border border-white/10 hover:bg-white/5 hover:text-ink transition-all"
           >
             <RefreshCw size={12} /> Try again
           </button>

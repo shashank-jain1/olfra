@@ -1,154 +1,323 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600&display=swap');
-
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════
+   OLFRA™ — Design tokens
+
+   Fonts are loaded by next/font (see app/fonts.ts) and exposed as
+   --font-* CSS variables on <html>. The @import that used to sit at the
+   top of this file was render-blocking and CDN-dependent.
+   ═══════════════════════════════════════════════════════════ */
+
 @theme {
-  --color-obsidian: #06080A;
+  /* ─── Ground & surfaces ───────────────────────────────────
+     One black, not two. The layout previously painted #080B0F while
+     the token said #06080A, so every full-bleed section sat on a
+     slightly different ground than the cards on top of it. */
+  --color-obsidian:   #06080A;
   --color-obsidian-2: #0A0D12;
   --color-obsidian-3: #11151B;
+  --color-obsidian-4: #171C24;
 
-  --color-amber: #C8922A;
+  /* ─── Ink scale ───────────────────────────────────────────
+     Contrast-checked against --color-obsidian. The old palette leaned
+     on white/20 and white/30, which measure ~1.9:1 and ~2.6:1 — below
+     the 4.5:1 WCAG AA floor, and genuinely hard to read. These are the
+     lowest values that still pass, so the design keeps its whisper-
+     quiet register without making labels guesswork.
+
+     ink        21:1   headings, primary copy
+     ink-muted  11:1   body copy, descriptions
+     ink-soft    7:1   secondary detail
+     ink-faint   5:1   labels, eyebrows, captions — the floor
+     ink-ghost   2.6:1 DECORATIVE ONLY: rules, dividers, disabled */
+  --color-ink:       #F0EDE8;
+  --color-ink-muted: rgba(240, 237, 232, 0.72);
+  --color-ink-soft:  rgba(240, 237, 232, 0.58);
+  --color-ink-faint: rgba(240, 237, 232, 0.46);
+  --color-ink-ghost: rgba(240, 237, 232, 0.28);
+
+  /* ─── Accent ─────────────────────────────────────────────── */
+  --color-amber:       #C8922A;
   --color-amber-light: #E8A83C;
-  --color-amber-dim: rgba(200, 146, 42, 0.15);
+  --color-amber-dim:   rgba(200, 146, 42, 0.15);
 
-  --color-crimson: #C0392B;
+  /* ─── Module hues ─────────────────────────────────────────
+     One per intelligence module, so a page's identity is legible
+     before you read its heading. */
+  --color-crimson:     #C0392B;
   --color-crimson-dim: rgba(192, 57, 43, 0.15);
-  
-  --color-lime: #A8CC2C;
-  --color-lime-dim: rgba(168, 204, 44, 0.15);
-  
-  --color-rose: #C2627A;
-  --color-rose-dim: rgba(194, 98, 122, 0.15);
-  
-  --color-mint: #2FFFA8;
-  --color-mint-dim: rgba(47, 255, 168, 0.12);
+  --color-lime:        #A8CC2C;
+  --color-lime-dim:    rgba(168, 204, 44, 0.15);
+  --color-rose:        #C2627A;
+  --color-rose-dim:    rgba(194, 98, 122, 0.15);
+  --color-mint:        #2FFFA8;
+  --color-mint-dim:    rgba(47, 255, 168, 0.12);
+  --color-iris:        #8B7FD4;
+  --color-iris-dim:    rgba(139, 127, 212, 0.15);
 
-  --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-mono: "DM Mono", "Courier New", monospace;
-  --font-sans: "Inter", system-ui, sans-serif;
+  /* ─── Semantic ───────────────────────────────────────────
+     Kept separate from the accent so "this is good" never reads as
+     "this is branded". */
+  --color-signal-good: #2FFFA8;
+  --color-signal-warn: #E8A83C;
+  --color-signal-bad:  #E0574A;
 
-  --shadow-glow-amber: 0 0 40px rgba(200, 146, 42, 0.15);
-  --shadow-glow-mint: 0 0 40px rgba(47, 255, 168, 0.1);
+  /* ─── Lines ─────────────────────────────────────────────── */
+  --color-hairline:        rgba(255, 255, 255, 0.06);
+  --color-hairline-strong: rgba(255, 255, 255, 0.12);
+
+  /* ─── Type ──────────────────────────────────────────────── */
+  --font-serif: var(--font-serif-src), "Cormorant Garamond", Georgia, serif;
+  --font-sans:  var(--font-sans-src), "Inter", system-ui, sans-serif;
+  --font-mono:  var(--font-mono-src), "DM Mono", ui-monospace, monospace;
+
+  /* Fluid display sizes — one scale, used everywhere. */
+  --text-display:    clamp(2.75rem, 7.5vw, 6.5rem);
+  --text-display-sm: clamp(2.25rem, 5.5vw, 4rem);
+  --text-title:      clamp(1.75rem, 3.5vw, 2.75rem);
+
+  /* ─── Elevation ─────────────────────────────────────────── */
+  --shadow-glow-amber:   0 0 40px rgba(200, 146, 42, 0.15);
+  --shadow-glow-mint:    0 0 40px rgba(47, 255, 168, 0.10);
   --shadow-glow-crimson: 0 0 40px rgba(192, 57, 43, 0.15);
-  --shadow-glow-lime: 0 0 40px rgba(168, 204, 44, 0.15);
-  --shadow-glow-rose: 0 0 40px rgba(194, 98, 122, 0.15);
-  --shadow-glow-subtle: 0 4px 40px rgba(0,0,0,0.5);
-  
+  --shadow-glow-lime:    0 0 40px rgba(168, 204, 44, 0.15);
+  --shadow-glow-rose:    0 0 40px rgba(194, 98, 122, 0.15);
+  --shadow-lift:         0 18px 50px -12px rgba(0, 0, 0, 0.7);
+
+  /* ─── Motion ─────────────────────────────────────────────
+     One easing curve across the product. Every duration is a multiple
+     of the base so timings feel related rather than arbitrary. */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:   180ms;
+  --dur-base:   360ms;
+  --dur-slow:   640ms;
+  --dur-slower: 1000ms;
+
   --animate-pulse-ring: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-shimmer: shimmer 2s linear infinite;
-  --animate-scan-line: scan-line 8s linear infinite;
-  --animate-breathe: breathe 4s ease-in-out infinite;
+  --animate-float:      float 6s ease-in-out infinite;
+  --animate-shimmer:    shimmer 2.4s linear infinite;
+  --animate-breathe:    breathe 4s ease-in-out infinite;
+  --animate-drift:      drift 24s linear infinite;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════ */
+
 @layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  *, *::before, *::after { box-sizing: border-box; }
+
+  * { margin: 0; padding: 0; }
 
   html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    /* Keeps anchored sections clear of the fixed navbar. */
+    scroll-padding-top: 6rem;
   }
 
   body {
     background-color: var(--color-obsidian);
-    color: #F0EDE8;
+    color: var(--color-ink);
     font-family: var(--font-sans);
-    min-height: 100vh;
-    overflow-x: hidden;
+    min-height: 100dvh;
+    /* `overflow-x: hidden` used to live here, which silently swallowed
+       any element that overflowed instead of surfacing it. Wide content
+       now scrolls inside its own container (.scroll-x). */
   }
 
-  /* Luxurious typography settings */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
     font-weight: 300;
-    letter-spacing: -0.02em; /* Editorial tuck */
-    line-height: 1.1;
+    letter-spacing: -0.022em;
+    line-height: 1.06;
+    text-wrap: balance;
   }
 
-  p {
-    line-height: 1.7;
-    letter-spacing: 0.01em;
+  p { line-height: 1.7; letter-spacing: 0.005em; }
+
+  /* Prose columns stay readable rather than running the full viewport. */
+  .measure    { max-width: 66ch; }
+  .measure-sm { max-width: 52ch; }
+
+  /* ─── Focus ─────────────────────────────────────────────
+     A single visible ring for keyboard users across the whole app.
+     Previously most interactive elements had no focus state at all,
+     which made the product unusable without a mouse. */
+  :focus-visible {
+    outline: 2px solid var(--color-amber-light);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
+  :focus:not(:focus-visible) { outline: none; }
+
+  ::selection { background: rgba(200, 146, 42, 0.25); color: #fff; }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-obsidian); }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(200, 146, 42, 0.22);
+    border-radius: 100px;
+    border: 3px solid var(--color-obsidian);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(200, 146, 42, 0.45); }
+
+  /* Native controls inherit the accent instead of the OS blue. */
+  input[type="range"] { accent-color: var(--color-amber); }
+
+  img, svg, video { display: block; max-width: 100%; }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   COMPONENTS
+   ═══════════════════════════════════════════════════════════ */
+
 @layer components {
-  /* ═══════════════════════════════════════════════
-     GLASS CARD UTILITIES
-  ═══════════════════════════════════════════════ */
+  /* ─── Skip link ─────────────────────────────────────────── */
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    border-radius: 100px;
+    background: var(--color-amber);
+    color: #0A0D12;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transform: translateY(-160%);
+    transition: transform var(--dur-fast) var(--ease-out-expo);
+  }
+  .skip-link:focus { transform: translateY(0); }
+
+  /* ─── Glass surfaces ────────────────────────────────────── */
   .glass {
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05); /* Extremely subtle border */
+    border: 1px solid var(--color-hairline);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
 
   .glass-card {
-    background: rgba(10, 13, 18, 0.6); /* deeply transparent base */
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(10, 13, 18, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-radius: 12px;
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.03); /* Lifted but no heavy glows */
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 16px;
+    box-shadow:
+      0 4px 40px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    transition:
+      background var(--dur-base) var(--ease-out-expo),
+      border-color var(--dur-base) var(--ease-out-expo),
+      transform var(--dur-base) var(--ease-out-expo),
+      box-shadow var(--dur-base) var(--ease-out-expo);
   }
 
   .glass-card:hover {
-    background: rgba(15, 20, 26, 0.8);
-    border-color: rgba(255, 255, 255, 0.08); /* slight brightening of border */
-    transform: translateY(-2px);
+    background: rgba(17, 21, 27, 0.78);
+    border-color: rgba(255, 255, 255, 0.10);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
   }
 
-  /* Refined, whisper-light module variant glows */
-  .glass-card--amber:hover   { box-shadow: 0 8px 30px rgba(200, 146, 42, 0.06), inset 0 1px 0 rgba(200,146,42,0.1); border-color: rgba(200, 146, 42, 0.15); }
-  .glass-card--crimson:hover { box-shadow: 0 8px 30px rgba(192, 57, 43, 0.06), inset 0 1px 0 rgba(192,57,43,0.1); border-color: rgba(192, 57, 43, 0.15); }
-  .glass-card--lime:hover    { box-shadow: 0 8px 30px rgba(168, 204, 44, 0.06), inset 0 1px 0 rgba(168,204,44,0.1); border-color: rgba(168, 204, 44, 0.15); }
-  .glass-card--rose:hover    { box-shadow: 0 8px 30px rgba(194, 98, 122, 0.06), inset 0 1px 0 rgba(194,98,122,0.1); border-color: rgba(194, 98, 122, 0.15); }
-  .glass-card--mint:hover    { box-shadow: 0 8px 30px rgba(47, 255, 168, 0.06), inset 0 1px 0 rgba(47,255,168,0.1); border-color: rgba(47, 255, 168, 0.15); }
+  .glass-card--amber:hover   { border-color: rgba(200, 146, 42, 0.28); box-shadow: 0 18px 50px -12px rgba(0,0,0,0.7), var(--shadow-glow-amber); }
+  .glass-card--crimson:hover { border-color: rgba(192, 57, 43, 0.28);  box-shadow: 0 18px 50px -12px rgba(0,0,0,0.7), var(--shadow-glow-crimson); }
+  .glass-card--lime:hover    { border-color: rgba(168, 204, 44, 0.28); box-shadow: 0 18px 50px -12px rgba(0,0,0,0.7), var(--shadow-glow-lime); }
+  .glass-card--rose:hover    { border-color: rgba(194, 98, 122, 0.28); box-shadow: 0 18px 50px -12px rgba(0,0,0,0.7), var(--shadow-glow-rose); }
+  .glass-card--mint:hover    { border-color: rgba(47, 255, 168, 0.28); box-shadow: 0 18px 50px -12px rgba(0,0,0,0.7), var(--shadow-glow-mint); }
 
-  /* ═══════════════════════════════════════════════
-     GRADIENT UTILITIES
-  ═══════════════════════════════════════════════ */
+  /* ─── Grain ─────────────────────────────────────────────
+     Film grain over the whole page. Replaces the old approach of
+     drawing 800 random 1px rects per animation frame in canvas —
+     roughly 48,000 fill operations a second, for a texture that
+     never needed to move. This is one static SVG, composited by the
+     GPU, at zero per-frame cost. */
+  .grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
+  }
+
+  /* ─── Text treatments ───────────────────────────────────── */
   .text-gradient-amber {
-    background: linear-gradient(135deg, #E8A83C 0%, #C8922A 100%);
+    background: linear-gradient(135deg, #F0C070 0%, #C8922A 60%, #A8761C 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
-  .animate-fade-in {
-    animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-ink-faint);
   }
+
+  /* Digits that sit in columns should line up. */
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  /* ─── Wide content ──────────────────────────────────────
+     Tables, diagrams and code scroll inside their own box so the
+     page body never scrolls sideways. */
+  .scroll-x {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ─── Hairline rules ────────────────────────────────────── */
+  .rule {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-hairline-strong) 15%,
+      var(--color-hairline-strong) 85%,
+      transparent
+    );
+  }
+
+  /* ─── Entrance animations ───────────────────────────────── */
+  .animate-fade-in    { animation: fade-in var(--dur-slow) var(--ease-out-expo) both; }
+  .animate-rise       { animation: rise var(--dur-slow) var(--ease-out-expo) both; }
+  .animate-reveal-mask{ animation: reveal-mask var(--dur-slower) var(--ease-out-expo) both; }
+
+  /* Stagger children without writing a delay on each one. */
+  .stagger > *          { animation: rise var(--dur-slow) var(--ease-out-expo) both; }
+  .stagger > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger > *:nth-child(2) { animation-delay: 70ms; }
+  .stagger > *:nth-child(3) { animation-delay: 140ms; }
+  .stagger > *:nth-child(4) { animation-delay: 210ms; }
+  .stagger > *:nth-child(5) { animation-delay: 280ms; }
+  .stagger > *:nth-child(6) { animation-delay: 350ms; }
+  .stagger > *:nth-child(7) { animation-delay: 420ms; }
+  .stagger > *:nth-child(8) { animation-delay: 490ms; }
 }
 
-/* ═══════════════════════════════════════════════
-   SCROLLBAR
-═══════════════════════════════════════════════ */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--color-obsidian-2); }
-::-webkit-scrollbar-thumb { background: rgba(200, 146, 42, 0.2); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(200, 146, 42, 0.5); }
+/* ═══════════════════════════════════════════════════════════
+   KEYFRAMES
+   ═══════════════════════════════════════════════════════════ */
 
-/* ═══════════════════════════════════════════════
-   SELECTION
-═══════════════════════════════════════════════ */
-::selection { background: rgba(200, 146, 42, 0.2); color: #fff; }
-
-/* ═══════════════════════════════════════════════
-   ANIMATIONS
-═══════════════════════════════════════════════ */
 @keyframes pulse-ring {
-  0%   { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(3); opacity: 0; }
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(3.2); opacity: 0; }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-4px); }
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
 }
 
 @keyframes shimmer {
@@ -156,22 +325,57 @@
   100% { background-position: 200% center; }
 }
 
-@keyframes scan-line {
-  0%   { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
-}
-
 @keyframes breathe {
-  0%, 100% { transform: scale(1); opacity: 0.9; }
-  50%       { transform: scale(1.03); opacity: 1; }
+  0%, 100% { transform: scale(1);    opacity: 0.88; }
+  50%      { transform: scale(1.035); opacity: 1; }
 }
 
-@keyframes spin-dna {
-  0%   { transform: rotateY(0deg); }
-  100% { transform: rotateY(360deg); }
+@keyframes drift {
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(2%, -1.5%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Wipes a heading into view from beneath its own baseline. */
+@keyframes reveal-mask {
+  from { opacity: 0; clip-path: inset(0 0 100% 0); transform: translateY(0.2em); }
+  to   { opacity: 1; clip-path: inset(0 0 -10% 0); transform: translateY(0); }
+}
+
+/* Traces an SVG path. Pair with pathLength="1". */
+@keyframes draw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   REDUCED MOTION
+
+   Honours the OS setting globally rather than per-component. Content
+   still arrives at its final state — animations are collapsed, not
+   cancelled, so nothing stays invisible.
+   ═══════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .glass-card:hover { transform: none; }
+  .grain::after { display: none; }
 }

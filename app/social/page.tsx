@@ -67,7 +67,7 @@ export default function ScentSocialPage() {
           <h1 className="text-3xl text-white mb-2" style={{ fontFamily: 'var(--font-serif)', fontWeight: 300 }}>
             ScentSocial<em style={{ color: '#C8922A' }}>™</em>
           </h1>
-          <p className="text-white/40 text-sm">What the community is wearing right now</p>
+          <p className="text-ink-faint text-sm">What the community is wearing right now</p>
         </div>
 
         <div className="space-y-4">
@@ -92,7 +92,7 @@ export default function ScentSocialPage() {
                     </div>
                     <div>
                       <p className="font-mono text-sm text-white">@{post.user}</p>
-                      <p className="text-xs text-white/30 font-mono">{post.fragrance}</p>
+                      <p className="text-xs text-ink-faint font-mono">{post.fragrance}</p>
                     </div>
                   </div>
                   {/* DNA Match Badge */}
@@ -102,7 +102,7 @@ export default function ScentSocialPage() {
                 </div>
 
                 {/* Caption */}
-                <p className="text-white/70 leading-relaxed mb-3" style={{ fontFamily: 'var(--font-serif)', fontSize: '16px' }}>
+                <p className="text-ink-muted leading-relaxed mb-3" style={{ fontFamily: 'var(--font-serif)', fontSize: '16px' }}>
                   {post.caption}
                 </p>
 
@@ -130,13 +130,13 @@ export default function ScentSocialPage() {
                     <Heart size={14} fill={liked.has(post.id) ? '#C2627A' : 'none'} />
                     {post.likes + (liked.has(post.id) ? 1 : 0)}
                   </button>
-                  <button className="flex items-center gap-1.5 text-sm font-mono text-white/30 hover:text-white/60 transition-colors">
+                  <button className="flex items-center gap-1.5 text-sm font-mono text-ink-faint hover:text-ink-soft transition-colors">
                     <MessageCircle size={14} /> {post.comments}
                   </button>
-                  <button className="flex items-center gap-1.5 text-sm font-mono text-white/30 hover:text-white/60 transition-colors">
+                  <button className="flex items-center gap-1.5 text-sm font-mono text-ink-faint hover:text-ink-soft transition-colors">
                     <BookmarkPlus size={14} />
                   </button>
-                  <button className="flex items-center gap-1.5 text-sm font-mono text-white/30 hover:text-white/60 transition-colors">
+                  <button className="flex items-center gap-1.5 text-sm font-mono text-ink-faint hover:text-ink-soft transition-colors">
                     <Share2 size={14} />
                   </button>
                 </div>

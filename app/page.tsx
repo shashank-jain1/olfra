@@ -1,393 +1,459 @@
 'use client';
-import { useRef, useEffect } from 'react';
+
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Shield, Globe, Sparkles, Dna, ArrowRight, Star } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import {
+  Shield,
+  Globe,
+  Sparkles,
+  Dna,
+  ArrowRight,
+  ArrowDown,
+  Layers,
+  Camera,
+} from 'lucide-react';
+import { DiffusionField } from '@/components/viz/DiffusionField';
+import { ProofPanel } from '@/components/home/ProofPanel';
 
-// ─── CSS Shader Background ─────────────────────────────────────
-function ShaderHero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let W = window.innerWidth;
-    let H = window.innerHeight;
-    canvas.width = W;
-    canvas.height = H;
-
-    let t = 0;
-    let animId: number;
-
-    const resize = () => {
-      W = window.innerWidth;
-      H = window.innerHeight;
-      canvas.width = W;
-      canvas.height = H;
-    };
-    window.addEventListener('resize', resize);
-
-    const lerp = (a: number, b: number, k: number) => a + (b - a) * k;
-
-    function noise(x: number, y: number, time: number) {
-      return (
-        Math.sin(x * 0.8 + time) * 0.5 +
-        Math.sin(y * 0.6 + time * 0.7) * 0.5 +
-        Math.sin((x + y) * 0.4 + time * 1.2) * 0.3
-      );
-    }
-
-    const blobs = [
-      { x: 0.3, y: 0.4, r: 0.35, color: [200, 146, 42], speed: 0.2 },
-      { x: 0.7, y: 0.5, r: 0.28, color: [139, 94, 26], speed: 0.15 }, /* Amber deep */
-      { x: 0.5, y: 0.7, r: 0.22, color: [232, 168, 60], speed: 0.25 }, /* Amber light */
-    ];
-
-    const draw = () => {
-      t += 0.003;
-      ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = '#06080A'; // Deep obsidian
-      ctx.fillRect(0, 0, W, H);
-
-      blobs.forEach((b) => {
-        const nx = noise(b.x * 3, b.y * 3, t * b.speed);
-        const ny = noise(b.y * 3, b.x * 3, t * b.speed + 10);
-        const cx = lerp(0, W, b.x + nx * 0.15);
-        const cy = lerp(0, H, b.y + ny * 0.15);
-        const radius = Math.min(W, H) * b.r;
-
-        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-        g.addColorStop(0, `rgba(${b.color.join(',')},0.12)`); // Softened opacity
-        g.addColorStop(0.5, `rgba(${b.color.join(',')},0.04)`);
-        g.addColorStop(1, `rgba(${b.color.join(',')},0)`);
-
-        ctx.beginPath();
-        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-        ctx.fillStyle = g;
-        ctx.fill();
-      });
-
-      // Ultra-fine grain overlay
-      for (let i = 0; i < 800; i++) {
-        const x = Math.random() * W;
-        const y = Math.random() * H;
-        ctx.fillStyle = `rgba(255,255,255,${Math.random() * 0.01})`;
-        ctx.fillRect(x, y, 1, 1);
-      }
-
-      animId = requestAnimationFrame(draw);
-    };
-
-    draw();
-    return () => {
-      window.removeEventListener('resize', resize);
-      cancelAnimationFrame(animId);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full mix-blend-screen opacity-70"
-    />
-  );
-}
-
-
-// ─── Module Card for scroll section ───────────────────────────
-const MODULES = [
+const PILLARS = [
   {
-    icon: <Shield size={48} strokeWidth={1} />, // Thinner icons for premium feel
+    icon: Shield,
     name: 'DupeShield',
-    desc: 'AI-powered dupe detection & brand protection intelligence',
+    desc: 'Similarity scored from accord structure and drydown overlap, not marketing copy.',
     href: '/dupeshield',
-    colorVar: 'var(--color-crimson)',
-    bgClass: 'hover:border-crimson/30 hover:shadow-[0_8px_30px_rgba(192,57,43,0.06)]',
-    textClass: 'text-crimson',
+    hue: 'var(--color-rose)',
+    variant: 'glass-card--rose',
   },
   {
-    icon: <Globe size={48} strokeWidth={1} />,
-    name: 'ScentCulture',
-    desc: 'Real-time global fragrance trend intelligence dashboard',
-    href: '/culture',
-    colorVar: 'var(--color-lime)',
-    bgClass: 'hover:border-lime/30 hover:shadow-[0_8px_30px_rgba(168,204,44,0.06)]',
-    textClass: 'text-lime',
-  },
-  {
-    icon: <Sparkles size={48} strokeWidth={1} />,
-    name: 'ScentMoment',
-    desc: 'Occasion & mood-based fragrance recommendation engine',
-    href: '/moment',
-    colorVar: 'var(--color-rose)',
-    bgClass: 'hover:border-rose/30 hover:shadow-[0_8px_30px_rgba(194,98,122,0.06)]',
-    textClass: 'text-rose',
-  },
-  {
-    icon: <Dna size={48} strokeWidth={1} />,
+    icon: Dna,
     name: 'ScentDNA',
-    desc: 'Skin chemistry profiler — predicts how scent evolves on YOU',
+    desc: 'How fragrance behaves on your skin — sebum, temperature, climate.',
     href: '/dna',
-    colorVar: 'var(--color-mint)',
-    bgClass: 'hover:border-mint/30 hover:shadow-[0_8px_30px_rgba(47,255,168,0.06)]',
-    textClass: 'text-mint',
+    hue: 'var(--color-mint)',
+    variant: 'glass-card--mint',
   },
-];
+  {
+    icon: Sparkles,
+    name: 'ScentMoment',
+    desc: 'Occasion, mood, weather and longevity blended into one accord target.',
+    href: '/moment',
+    hue: 'var(--color-amber)',
+    variant: 'glass-card--amber',
+  },
+  {
+    icon: Layers,
+    name: 'ScentLayer',
+    desc: 'Whether two fragrances combine — or quietly cancel each other out.',
+    href: '/layer',
+    hue: 'var(--color-lime)',
+    variant: 'glass-card--lime',
+  },
+] as const;
 
-function ParallaxSection() {
-  const ref = useRef<HTMLDivElement>(null);
+const SECONDARY = [
+  { icon: Camera, name: 'ScentSnap', desc: 'Identify a bottle', href: '/snap' },
+  { icon: Globe, name: 'ScentCulture', desc: 'What the world wears', href: '/culture' },
+] as const;
 
-  return (
-    <section ref={ref} className="py-40 px-6 overflow-hidden bg-obsidian-2 relative z-10">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-24"
-        >
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/30 mb-6">The Four Pillars</p>
-          <h2 className="text-4xl md:text-5xl text-white font-serif font-light tracking-tight">
-            Intelligence in every dimension
-          </h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {MODULES.map((mod, i) => (
-            <motion.div
-              key={mod.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: "-50px" }}
-              className="h-full"
-            >
-              <Link href={mod.href} className="block h-full">
-                <div
-                  className={`glass-card p-8 h-full flex flex-col gap-6 cursor-pointer group transition-all duration-500 ease-out bg-obsidian-3/40 border-white/5 ${mod.bgClass}`}
-                >
-                  <div className={`${mod.textClass} opacity-60 group-hover:opacity-100 transition-opacity duration-500`}>
-                    {mod.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-2xl text-white/90 mb-3 font-serif font-light tracking-wide group-hover:text-white transition-colors duration-500">
-                      {mod.name}
-                    </h3>
-                    <p className="text-white/40 text-[15px] leading-relaxed group-hover:text-white/60 transition-colors duration-500">
-                      {mod.desc}
-                    </p>
-                  </div>
-                  <div
-                    className={`flex items-center gap-2 text-[11px] font-mono tracking-widest mt-auto opacity-0 group-hover:opacity-100 transition-all duration-500 -translate-x-2 group-hover:translate-x-0 ${mod.textClass}`}
-                  >
-                    EXPLORE <ArrowRight size={14} />
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Stats Ticker ──────────────────────────────────────────────
-const STATS = [
-  { value: '74,000+', label: 'Fragrances' },
-  { value: '12', label: 'Cities Tracked' },
-  { value: '99.2%', label: 'AI Accuracy' },
-  { value: '6', label: 'Skin Factors Analyzed' },
-  { value: '8', label: 'Modules' },
-  { value: '< 1s', label: 'Analysis Time' },
-];
-
-function StatsTicker() {
-  return (
-    <div className="border-y border-white/5 py-10 px-6 overflow-hidden bg-obsidian relative z-10">
-      <motion.div
-        className="flex gap-24"
-        animate={{ x: [0, -1200] }}
-        transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-      >
-        {[...STATS, ...STATS, ...STATS].map((s, i) => (
-          <div key={i} className="flex items-center gap-8 shrink-0">
-            <div className="text-right">
-              <div className="text-[22px] font-mono font-light text-amber mb-1">{s.value}</div>
-              <div className="text-[10px] font-mono text-white/30 uppercase tracking-[0.15em]">{s.label}</div>
-            </div>
-            <div className="w-px h-10 bg-white/5" />
-          </div>
-        ))}
-      </motion.div>
-    </div>
-  );
-}
-
-// ─── Testimonials ──────────────────────────────────────────────
-const TESTIMONIALS = [
-  { quote: 'DupeShield saved me $400 on a BR540 clone. The 91% match was incredibly accurate.', author: 'Priya M., Mumbai' },
-  { quote: 'ScentDNA finally explained why Aventus smells like baby powder on my specific skin chemistry.', author: 'James R., London' },
-  { quote: 'The ScentMoment recommendation for my wedding was absolutely perfect. It matched the exact vibe.', author: 'Sofia A., Dubai' },
-];
+/** Real, checkable properties — no invented accuracy figures. */
+const FACTS = [
+  { value: '32', label: 'Accord dimensions scored' },
+  { value: '4', label: 'Deterministic engines' },
+  { value: '0', label: 'API keys to get started' },
+  { value: '100%', label: 'Reproducible results' },
+  { value: '4', label: 'Signals per match' },
+] as const;
 
 export default function HomePage() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <main className="bg-obsidian">
-      {/* Hero */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-20">
-        <ShaderHero />
+      {/* ─── Hero ─────────────────────────────────────────── */}
+      <section className="relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden px-6 pt-24 pb-20">
+        <DiffusionField className="opacity-90" />
+
+        {/* Vignette keeps the headline legible over a moving field. */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 70% 55% at 50% 45%, transparent 0%, rgba(6,8,10,0.55) 65%, rgba(6,8,10,0.92) 100%)',
+          }}
+        />
+
         <div className="relative z-10 text-center max-w-5xl mx-auto w-full">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center"
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-3 px-5 py-2 rounded-full mb-12 bg-amber/[0.07] border border-amber/25 backdrop-blur-md"
           >
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-3 px-5 py-2 rounded-full mb-12 bg-amber/5 border border-amber/20 backdrop-blur-md"
+            <span className="w-1.5 h-1.5 rounded-full bg-mint animate-breathe" />
+            <span className="font-mono text-[10px] text-amber tracking-[0.2em] uppercase">
+              Deterministic scoring · No account needed
+            </span>
+          </motion.div>
+
+          <h1 className="text-display text-ink mb-9 leading-[0.88] tracking-tighter">
+            <span className="block overflow-hidden pb-[0.08em]">
+              <motion.span
+                className="block"
+                initial={reduceMotion ? false : { y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              >
+                The intelligence
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden pb-[0.08em]">
+              <motion.span
+                className="block"
+                initial={reduceMotion ? false : { y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              >
+                of{' '}
+                <em className="text-gradient-amber font-serif italic">scent</em>
+              </motion.span>
+            </span>
+          </h1>
+
+          <motion.p
+            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="text-lg md:text-xl text-ink-soft mb-14 measure-sm mx-auto font-light leading-relaxed"
+          >
+            Fragrance analysis built on measurable chemistry. Every score is
+            computed from note and accord data — explainable, reproducible, and
+            identical every time you ask.
+          </motion.p>
+
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.66, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <Link
+              href="/dupeshield"
+              className="group flex items-center justify-center gap-3 px-8 py-4 min-w-[230px] rounded-full bg-gradient-to-tr from-amber to-amber-light text-obsidian font-mono text-[12px] uppercase tracking-[0.15em] font-medium shadow-glow-amber hover:-translate-y-0.5 transition-transform duration-300"
             >
-              <Star size={12} className="text-amber" />
-              <span className="font-mono text-[10px] text-amber tracking-[0.2em] font-medium">
-                POWERED BY Shashank Jain · FRAGELLA API
-              </span>
-            </motion.div>
+              Find a dupe
+              <ArrowRight
+                size={14}
+                className="group-hover:translate-x-1 transition-transform duration-300"
+              />
+            </Link>
 
-            {/* Headline */}
-            <h1 className="text-6xl md:text-[110px] text-white/90 mb-8 leading-[0.9] font-serif font-light tracking-tighter">
-              The{' '}
-              <em className="font-serif italic text-gradient-amber pr-2 relative -left-2">
-                intelligence
-              </em>
-              <br />
-              <span className="relative -left-4">of scent.</span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-white/40 mb-14 max-w-2xl mx-auto font-sans font-light leading-relaxed tracking-wide">
-              OLFRA™ is the world&apos;s most advanced fragrance intelligence platform.
-              AI that understands <em className="text-white/70 font-serif italic text-2xl pr-1">chemistry</em>, not just notes.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center w-full sm:w-auto">
-              <Link href="/dna">
-                <motion.div 
-                  whileHover={{ scale: 1.02, y: -2 }} 
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center justify-center gap-3 px-8 py-4 min-w-[240px] rounded-full bg-gradient-to-tr from-amber-light to-amber text-white font-mono text-[12px] uppercase tracking-[0.15em] shadow-glow-amber transition-all duration-300"
-                >
-                  Discover Your ScentDNA <ArrowRight size={14} />
-                </motion.div>
-              </Link>
-              
-              <Link href="/dupeshield">
-                <motion.div 
-                  whileHover={{ scale: 1.02, y: -2, backgroundColor: 'rgba(255,255,255,0.05)' }} 
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center justify-center gap-3 px-8 py-4 min-w-[240px] rounded-full glass border border-white/10 text-white/60 hover:text-white font-mono text-[12px] uppercase tracking-[0.15em] transition-all duration-300"
-                >
-                  Find a Dupe <Shield size={14} />
-                </motion.div>
-              </Link>
-            </div>
+            <Link
+              href="/dna"
+              className="flex items-center justify-center gap-3 px-8 py-4 min-w-[230px] rounded-full glass border-hairline-strong text-ink-muted hover:text-ink hover:bg-white/[0.05] font-mono text-[12px] uppercase tracking-[0.15em] transition-all duration-300"
+            >
+              Profile your skin
+              <Dna size={14} />
+            </Link>
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
-          animate={{ opacity: [0.3, 0.7, 0.3] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          initial={reduceMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.3, duration: 0.8 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10"
         >
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/20">Scroll</span>
-          <div className="w-[1px] h-16 bg-gradient-to-b from-amber/40 to-transparent" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-ink-ghost">
+            See it work
+          </span>
+          <motion.span
+            animate={reduceMotion ? undefined : { y: [0, 7, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            className="text-amber/50"
+          >
+            <ArrowDown size={15} />
+          </motion.span>
         </motion.div>
       </section>
 
-      {/* Stats */}
-      <StatsTicker />
+      <FactsMarquee />
 
-      {/* Module Cards */}
-      <ParallaxSection />
+      <ProofPanel />
 
-      {/* Testimonials */}
-      <section className="py-32 px-6 border-t border-white/5 bg-obsidian relative z-10 w-full">
-        <div className="max-w-6xl mx-auto">
+      {/* ─── Pillars ──────────────────────────────────────── */}
+      <section className="py-28 md:py-36 px-6 bg-obsidian relative z-10">
+        <div className="max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center mb-20"
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-16 max-w-2xl"
           >
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/30 mb-6">What Enthusiasts Say</p>
-            <h2 className="text-3xl md:text-5xl text-white/90 font-serif font-light tracking-tight">
-              Trusted by fragrance communities worldwide
+            <p className="eyebrow mb-6">Four engines</p>
+            <h2 className="text-title text-ink mb-5">
+              Intelligence in every dimension
             </h2>
+            <p className="text-ink-soft leading-relaxed">
+              Each runs on the same accord model, so a profile built in one
+              module sharpens the answers in the others.
+            </p>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((t, i) => (
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {PILLARS.map((pillar, index) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
+                key={pillar.name}
+                initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="glass p-10 rounded-2xl border-white/5 hover:border-white/10 hover:bg-white/[0.03] transition-colors duration-500"
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{
+                  delay: index * 0.08,
+                  duration: 0.65,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
               >
-                <div className="flex gap-1 mb-8 opacity-80">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={14} className="fill-amber text-amber" />
-                  ))}
-                </div>
-                <p className="text-white/60 leading-relaxed mb-8 font-serif italic text-xl">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <p className="text-white/30 font-mono text-[11px] uppercase tracking-[0.1em]">{t.author}</p>
+                <Link href={pillar.href} className="block h-full group">
+                  <article
+                    className={`glass-card ${pillar.variant} p-7 h-full flex flex-col gap-6 rounded-2xl relative overflow-hidden`}
+                  >
+                    <pillar.icon
+                      size={30}
+                      strokeWidth={1.15}
+                      style={{ color: pillar.hue }}
+                      className="opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+                    />
+
+                    <div className="flex-1">
+                      <h3 className="text-xl text-ink mb-2.5 font-serif tracking-wide">
+                        {pillar.name}
+                      </h3>
+                      <p className="text-ink-soft text-[14px] leading-relaxed">
+                        {pillar.desc}
+                      </p>
+                    </div>
+
+                    <span
+                      className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.15em] opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300"
+                      style={{ color: pillar.hue }}
+                    >
+                      Open <ArrowRight size={12} />
+                    </span>
+                  </article>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">
+            {SECONDARY.map((item, index) => (
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08, duration: 0.6 }}
+              >
+                <Link
+                  href={item.href}
+                  className="glass-card p-6 rounded-2xl flex items-center gap-5 group"
+                >
+                  <item.icon
+                    size={22}
+                    strokeWidth={1.3}
+                    className="text-ink-faint group-hover:text-amber transition-colors duration-300"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-ink font-serif text-lg">{item.name}</h3>
+                    <p className="text-ink-faint text-[13px]">{item.desc}</p>
+                  </div>
+                  <ArrowRight
+                    size={14}
+                    className="text-ink-ghost group-hover:text-amber group-hover:translate-x-1 transition-all duration-300"
+                  />
+                </Link>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-40 px-6 text-center border-t border-white/5 bg-gradient-to-b from-obsidian to-obsidian-2 relative z-10">
+      {/* ─── Method ───────────────────────────────────────── */}
+      <section className="py-28 md:py-36 px-6 border-t border-hairline bg-obsidian-2 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7 }}
+            className="mb-16 max-w-2xl"
+          >
+            <p className="eyebrow mb-6">Why it can be trusted</p>
+            <h2 className="text-title text-ink">
+              A score that doesn&apos;t change its mind
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                n: '01',
+                title: 'Grounded in real data',
+                body: 'Scores come from published note pyramids and accord profiles. The engine cannot invent a fragrance, a note, or a price it has never seen.',
+              },
+              {
+                n: '02',
+                title: 'Identical every time',
+                body: 'The same query returns the same number today, tomorrow, and on someone else’s screen. Nothing about the result drifts between sessions.',
+              },
+              {
+                n: '03',
+                title: 'Shows its working',
+                body: 'Open any match to see the four measurements behind it and how each was weighted. No result asks to be taken on faith.',
+              },
+            ].map((item, index) => (
+              <motion.article
+                key={item.n}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                className="glass p-8 rounded-2xl border-hairline"
+              >
+                <span className="font-mono text-[10px] text-amber/60 tracking-[0.2em] block mb-6">
+                  {item.n}
+                </span>
+                <h3 className="text-ink font-serif text-xl mb-3">{item.title}</h3>
+                <p className="text-ink-soft text-[14px] leading-relaxed">
+                  {item.body}
+                </p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CTA ──────────────────────────────────────────── */}
+      <section className="py-32 md:py-44 px-6 text-center border-t border-hairline bg-gradient-to-b from-obsidian to-obsidian-2 relative z-10">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl mx-auto"
         >
-          <h2 className="text-5xl md:text-7xl text-white/90 mb-8 font-serif font-light tracking-tight">
-            Your scent. <em className="text-gradient-amber italic pr-2">Decoded.</em>
+          <h2 className="text-display-sm text-ink mb-7">
+            Your scent.{' '}
+            <em className="text-gradient-amber font-serif italic">Decoded.</em>
           </h2>
-          <p className="text-white/40 mb-14 text-lg font-light tracking-wide">
-            Begin with your ScentDNA profile — it takes 60 seconds.
+          <p className="text-ink-soft mb-12 text-lg font-light measure-sm mx-auto">
+            Start with a skin profile — six questions, about a minute, and it
+            sharpens every recommendation that follows.
           </p>
           <Link
             href="/dna"
-            className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-gradient-to-tr from-amber-light to-amber text-white font-mono text-[13px] uppercase tracking-[0.2em] shadow-glow-amber hover:shadow-[0_8px_60px_rgba(200,146,42,0.4)] transition-all duration-500 hover:-translate-y-1"
+            className="group inline-flex items-center gap-3 px-10 py-5 rounded-full bg-gradient-to-tr from-amber to-amber-light text-obsidian font-mono text-[13px] uppercase tracking-[0.18em] font-medium shadow-glow-amber hover:-translate-y-1 transition-transform duration-300"
           >
-            Start Free <ArrowRight size={16} />
+            Begin
+            <ArrowRight
+              size={16}
+              className="group-hover:translate-x-1.5 transition-transform duration-300"
+            />
           </Link>
         </motion.div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 text-center border-t border-white/5 bg-obsidian-2 relative z-10">
-        <p className="font-mono text-[10px] text-white/20 tracking-[0.15em] uppercase">
-          OLFRA™ — Built with Claude Sonnet + Fragella API · &copy; 2026
-        </p>
+      <footer className="py-14 px-6 border-t border-hairline bg-obsidian-2 relative z-10">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
+          <p className="font-mono text-[10px] text-ink-ghost tracking-[0.15em] uppercase">
+            OLFRA™ · Fragrance intelligence
+          </p>
+          <nav className="flex items-center gap-6" aria-label="Footer">
+            {[
+              { href: '/dupeshield', label: 'DupeShield' },
+              { href: '/dna', label: 'ScentDNA' },
+              { href: '/wardrobe', label: 'Wardrobe' },
+              { href: '/settings', label: 'Status' },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-faint hover:text-amber transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
       </footer>
     </main>
+  );
+}
+
+/**
+ * Seamless marquee.
+ *
+ * The previous version animated a fixed `x: [0, -1200]`, which only lined
+ * up at one viewport width and visibly jumped at every other. This
+ * translates by exactly -50% of a duplicated track, so the loop closes
+ * cleanly at any width — and collapses to a static row under
+ * prefers-reduced-motion rather than scrolling regardless.
+ */
+function FactsMarquee() {
+  const reduceMotion = useReducedMotion();
+  const track = [...FACTS, ...FACTS];
+
+  if (reduceMotion) {
+    return (
+      <div className="border-y border-hairline py-8 px-6 bg-obsidian relative z-10">
+        <div className="max-w-6xl mx-auto flex flex-wrap justify-center gap-x-12 gap-y-6">
+          {FACTS.map((fact) => (
+            <Fact key={fact.label} {...fact} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="border-y border-hairline py-8 overflow-hidden bg-obsidian relative z-10">
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 w-24 z-10"
+        style={{
+          background:
+            'linear-gradient(to right, var(--color-obsidian), transparent)',
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 w-24 z-10"
+        style={{
+          background:
+            'linear-gradient(to left, var(--color-obsidian), transparent)',
+        }}
+      />
+
+      <motion.div
+        className="flex gap-16 w-max"
+        animate={{ x: ['0%', '-50%'] }}
+        transition={{ duration: 34, repeat: Infinity, ease: 'linear' }}
+      >
+        {track.map((fact, index) => (
+          <Fact key={`${fact.label}-${index}`} {...fact} />
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+function Fact({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="flex items-center gap-5 shrink-0">
+      <span className="font-mono text-[22px] font-light text-amber tabular">
+        {value}
+      </span>
+      <span className="font-mono text-[10px] text-ink-faint uppercase tracking-[0.14em] whitespace-nowrap">
+        {label}
+      </span>
+    </div>
   );
 }
